@@ -1,0 +1,13 @@
+        <Flex bg={useColorModeValue("whiteAlpha.800", "blackAlpha.600")} my={4} w="100%" rounded="lg" p={4}>
+          <Button p={2} px={2} bg={useColorModeValue("orange.300", "orange.600")} onClick={() => handleAddAssignmentClick(course._id)}>
+            <FaPlus size={20} />
+          </Button>
+          <Flex mt={1} ml={3} w="100%">
+            <Text fontSize="lg" fontWeight="bold">
+              {course.courseCode}:
+            </Text>
+            <Text fontSize="lg" fontWeight="semibold" ml={2}>
+              {course.courseName}
+            </Text>
+          </Flex>
+          <AddAssignments isOpen={isOpen} onClose={onClose} courseId={course._id} />
