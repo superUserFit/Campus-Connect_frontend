@@ -11,7 +11,6 @@ import React, { useState, useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
-import { host } from "../APIRoute/APIRoute.js";
 
 
 const AddAssignments = ({ isOpen, onClose }) => {
@@ -98,7 +97,7 @@ const AddAssignments = ({ isOpen, onClose }) => {
         <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount>
             <ModalBody>
                 <ModalOverlay />
-                <ModalContent bg={useColorModeValue("orange.300", "orange.600")}>
+                <ModalContent bg={useColorModeValue("whiteAlpha.900", "blackAlpha.900")}>
                     <ModalHeader>
                         Add Assignments
                         <ModalCloseButton />
@@ -107,17 +106,17 @@ const AddAssignments = ({ isOpen, onClose }) => {
                         <Flex>
                         <FormControl pr={2}>
                             <FormLabel>Assignment</FormLabel>
-                            <Input w={"100%"} bg={"whiteAlpha.700"} autoComplete="nope" value={inputs.assignment} onChange={(e) => setInputs((inputs) => ({...inputs, assignment: e.target.value}))} />
+                            <Input w={"100%"} bg={useColorModeValue("gray.300", "gray.600")} autoComplete="nope" value={inputs.assignment} onChange={(e) => setInputs((inputs) => ({...inputs, assignment: e.target.value}))} />
                         </FormControl>
 
                         <FormControl pl={2}>
                             <FormLabel>Due Date</FormLabel>
-                            <Input type="date" w={"100%"} bg={"whiteAlpha.700"} value={inputs.dueDate} autoComplete="no" onChange={(e) => setInputs((inputs) => ({...inputs, dueDate: e.target.value}))}/>
+                            <Input type="date" w={"100%"} bg={useColorModeValue("gray.300", "gray.600")}  value={inputs.dueDate} autoComplete="no" onChange={(e) => setInputs((inputs) => ({...inputs, dueDate: e.target.value}))}/>
                         </FormControl>
                         </Flex>
 
                         <FormControl mt={"-4"}>
-                            <Select value={inputs.courseId} onChange={(e) => setInputs({...inputs, courseId: e.target.value})} bg={useColorModeValue("white", "gray.200")}>
+                            <Select value={inputs.courseId} onChange={(e) => setInputs({...inputs, courseId: e.target.value})} bg={useColorModeValue("gray.300", "gray.600")}>
                                 <option value={""} disabled>Select Course</option>
                                 {courses.map((course) => (
                                     <option key={course._id} value={JSON.stringify(course)}>{course.courseCode + course.courseName}</option>
@@ -127,10 +126,10 @@ const AddAssignments = ({ isOpen, onClose }) => {
 
                         <FormControl>
                             <FormLabel>Description</FormLabel>
-                            <Textarea w={"100%"} h={"10rem"} bg={"whiteAlpha.700"} value={inputs.description} onChange={(e) => setInputs((inputs) => ({...inputs, description: e.target.value}))} />
+                            <Textarea w={"100%"} h={"10rem"} bg={useColorModeValue("gray.300", "gray.600")}  value={inputs.description} onChange={(e) => setInputs((inputs) => ({...inputs, description: e.target.value}))} />
                         </FormControl>
 
-                        <Button w={"100%"} bg={useColorModeValue("whiteAlpha.800", "gray.700")} onClick={handleSubmit} isLoading={loading}>Submit</Button>
+                        <Button w={"100%"} bg={useColorModeValue("gray.300", "gray.600")} onClick={handleSubmit} isLoading={loading}>Submit</Button>
                     </Flex>
                 </ModalContent>
             </ModalBody>

@@ -12,13 +12,16 @@ import { useRecoilValue } from "recoil";
 import { FaPlus } from "react-icons/fa";
 import userAtom from "../atoms/userAtom.js";
 import AddAssignments from "./AddAssignments.jsx";
-import { host } from "../APIRoute/APIRoute.js";
+
 
 const Assignments = () => {
+    const [courses, setCourses] = useState([]);
     const [assignments, setAssignments] = useState([]);
-    const { onOpen, onClose } = useDisclosure();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const { socket } = useSocket();
     const showToast = useShowToast();
+    const user = useRecoilValue(userAtom);
+
 
     useEffect(() => {
         // Listen for the "addAssignment" event
@@ -36,6 +39,23 @@ const Assignments = () => {
     },[]);
 
 
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const response = await fetch(`/api/lecturer/getCourses/${user._id}`, {
+                    method: "GET"
+                });
+                const data = await response.json();
+
+                setCourses(data);
+            }catch(error) {
+                console.log(error);
+            }
+        }
+        fetchCourses();
+    }, []);
+
+
     const fetchAssignment = async () => {
         const response = await fetch(`/api/lecturer/getAssignments/${user._id}`, {
             method: "GET",
@@ -51,6 +71,7 @@ const Assignments = () => {
         }
     };
 
+
     const handleDeleteAssignment = async (assignmentId) => {
         const response = await fetch(`/api/lecturer/deleteAssignment/${assignmentId}`,{
             method: "DELETE"
@@ -62,59 +83,31 @@ const Assignments = () => {
         }
     }
 
+
     const handleAddAssignmentClick = () => {
         onOpen();
     };
 
+
     return (
         <>
             <Flex
-                bg={useColorModeValue("orange.300", "orange.600")}
+                bg={useColorModeValue("whiteAlpha.600", "blackAlpha.600")}
                 p={4}
                 rounded={"md"}
                 flexDirection={"column"}
-                mb={4}
+                my={4}
+                width={"80%"}
             >
-                <Text textAlign={"center"} fontSize={"xl"} fontWeight={"semibold"} mb={2}>Courses</Text>
-                <Flex flexDirection={"column"} w={"100%"}>
-                    <Grid
-                        templateColumns={"1fr 1fr 1fr 0.2fr"}
-                        gap={2}
-                        p={4}
-                        bg={useColorModeValue("wheat", "whiteAlpha.400")}
-                    >
-                        <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight={"medium"} textAlign={"center"} px={3}>Course Code</Box>
-                        <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight={"medium"} textAlign={"center"} px={3}>Course Name</Box>
-                        <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight={"medium"} textAlign={"center"} px={3}>Enrollment Key</Box>
-                        <Box p={1} textAlign={"center"}></Box>
-                        {courses.map((course) => (
-                            <React.Fragment key={course._id}>
-                                <Box p={2} textAlign={"center"} textColor={"black"}>{course.courseCode}</Box>
-                                <Box p={2} textAlign={"center"} textColor={"black"}>{course.courseName}</Box>
-                                <Box p={2} textAlign={"center"} textColor={"black"}>{course.courseKey}</Box>
-                                <Box textAlign={"center"} mt={2}>
-                                    <CloseButton p={5} bg={useColorModeValue("red.400", "red.600")} onClick={() => deleteCourse(course._id)} />
-                                </Box>
-                                <AddAssignments
-                                    courseId={course._id}
-                                    isOpen={isOpen}
-                                    onClose={onClose}
-                                />
-                            </React.Fragment>
-                        ))}
-                    </Grid>
-                </Flex>
-            </Flex>
-            <Flex flexDirection="column" bg={useColorModeValue("orange.300", "orange.600")} w="100%" p={4} rounded="xl">
                 <Flex flexDirection={"column"}>
                     <Flex rounded="lg">
-                        <Text fontSize={"lg"} fontWeight="bold">Assignments</Text>
-                        <Box bg={useColorModeValue("white", "blackAlpha.600")} cursor={"pointer"} p={2} mx={2} rounded={"md"} onClick={handleAddAssignmentClick}>
-                            <FaPlus size={12}/>
+                        <Text fontSize={"lg"} fontWeight="bold" mr={2} mt={1}>Assignments</Text>
+                        <Box bg={useColorModeValue("blackAlpha.200", "whiteAlpha.300")} cursor={"pointer"} p={2} px={10} mx={2} rounded={"md"} onClick={handleAddAssignmentClick}>
+                            <FaPlus size={20}/>
                         </Box>
                     </Flex>
                     {courses.map((course) => (
-                        <Flex flexDirection={"column"} my={2} mt={2} key={course._id}>
+                        <Flex flexDirection={"column"} my={4} key={course._id}>
                             <Flex columnGap={4}>
                                 <Text fontWeight={"semibold"}>{course.courseCode}</Text>
                                 <Text fontWeight={"medium"}>{course.courseName}</Text>
@@ -125,10 +118,10 @@ const Assignments = () => {
                                 p={4}
                                 maxH={"70vh"}
                                 overflowY={"auto"}
-                                bg={useColorModeValue("wheat", "gray.600")}
                             >
                                 <Box
-                                    bg={useColorModeValue("orange.300", "orange.600")}
+                                    border={"2px solid"}
+                                    borderColor={useColorModeValue("black", "white") }
                                     p={1}
                                     fontWeight="bold"
                                     textAlign="center"
@@ -136,7 +129,8 @@ const Assignments = () => {
                                     Assignment
                                 </Box>
                                 <Box
-                                    bg={useColorModeValue("orange.300", "orange.600")}
+                                    border={"2px solid"}
+                                    borderColor={useColorModeValue("black", "white")}
                                     p={1}
                                     fontWeight="bold"
                                     textAlign="center"
@@ -144,7 +138,8 @@ const Assignments = () => {
                                   Description
                                 </Box>
                                 <Box
-                                    bg={useColorModeValue("orange.300", "orange.600")}
+                                    border={"2px solid"}
+                                    borderColor={useColorModeValue("black", "white")}
                                     p={1}
                                     fontWeight="bold"
                                     textAlign="center"
@@ -152,6 +147,11 @@ const Assignments = () => {
                                     Due Date
                                 </Box>
                                 <Box textAlign="center"></Box>
+                                <AddAssignments
+                                    courseId={course._id}
+                                    isOpen={isOpen}
+                                    onClose={onClose}
+                                />
                                 {assignments
                                     .filter((assignment) => assignment.course === course._id)
                                     .map((assignment) => (
@@ -159,21 +159,24 @@ const Assignments = () => {
                                             <Box
                                                 p={2}
                                                 textAlign="center"
-                                                textColor={useColorModeValue("black", "white")}
+                                                border={"2px solid"}
+                                                bg={useColorModeValue("gray.300", "gray.700")}
                                             >
                                                 {assignment.name}
                                             </Box>
                                             <Box
                                                 p={2}
                                                 textAlign="center"
-                                                textColor={useColorModeValue("black", "white")}
+                                                border={"2px solid"}
+                                                bg={useColorModeValue("gray.300", "gray.700")}
                                             >
                                                 {assignment.description}
                                             </Box>
                                             <Box
                                                 p={2}
                                                 textAlign="center"
-                                                textColor={useColorModeValue("black", "white")}
+                                                border={"2px solid"}
+                                                bg={useColorModeValue("gray.300", "gray.700")}
                                             >
                                               {assignment.dueDate}
                                             </Box>
@@ -181,7 +184,7 @@ const Assignments = () => {
                                                 textAlign="center"
                                                 onClick={() => handleDeleteAssignment(assignment._id)}
                                             >
-                                              <CloseButton textColor={useColorModeValue("black", "white")} />
+                                              <CloseButton bg={useColorModeValue("red.400", "red.600")} textColor={useColorModeValue("black", "white")} />
                                             </Box>
                                         </React.Fragment>
                                     ))}

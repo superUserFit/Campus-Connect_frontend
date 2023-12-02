@@ -133,7 +133,7 @@ const GroupPage = () => {
 				mx={"auto"}
 				px={4}
 				pt={4}
-				bg={useColorModeValue("orange.200", "whiteAlpha.200")}
+				bg={useColorModeValue("gray.200", "whiteAlpha.200")}
 				maxW={{
 					sm: "720px",
 					md: "full",
@@ -183,7 +183,7 @@ const GroupPage = () => {
 						justifyContent={"center"}
 						height={"100vh"}
 						marginLeft={"2xl"}
-						bg={useColorModeValue("orange.300", "whiteAlpha.300")}
+						bg={useColorModeValue("whitesmoke", "whiteAlpha.300")}
 					>
 						<GiConversation size={100} />
 						<Text fontSize={20}>Select a group to start messaging</Text>

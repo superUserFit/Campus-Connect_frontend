@@ -55,7 +55,7 @@ const Message = ({ ownMessage, message }) => {
             		  onClose={() => setIsTooltipOpen(false)}
 				>
 					<Flex
-						bg={useColorModeValue("orange.500", "orange.600")}
+						bg={useColorModeValue("orange.300", "orange.700")}
 						minH={"12"}
 						maxW={"350px"} p={1}
 						borderRadius={"md"}
@@ -64,9 +64,9 @@ const Message = ({ ownMessage, message }) => {
 						onMouseEnter={() => setIsTooltipOpen(true)}
                 		onMouseLeave={() => setIsTooltipOpen(false)}
 					>
-					  	  <Flex flexDirection={"column"}>
-							  <Text color={"beige"} textDecoration={"underline"} letterSpacing={"wide"} mb={1} fontSize={"xs"} fontWeight={"semibold"}>{message.username}</Text>
-						  	  <Text fontSize={"md"} color={"white"}>{message.text}</Text>
+					  	  <Flex flexDirection={"column"} ml={2}>
+							  <Text color={useColorModeValue("black", "whiteAlpha.800")} textDecoration={"underline"} letterSpacing={"wide"} mb={1} fontSize={"xs"} fontWeight={"semibold"}>{message.username}</Text>
+						  	  <Text fontSize={"md"} color={useColorModeValue("black", "whiteAlpha.800")}>{message.text}</Text>
 						  </Flex>
 						  <Box
 							  alignSelf={"flex-end"}
@@ -74,7 +74,7 @@ const Message = ({ ownMessage, message }) => {
 							  color={message.seen ? "blue.400" : ""}
 						  >
 							  <Flex flexDirection={"row"} alignSelf={"flex-end"}>
-							  <Text fontSize={"xs"} color={"white"}>{formattedTimestamp}</Text>
+							  <Text fontSize={"xs"} color={useColorModeValue("black", "whiteAlpha.800")}>{formattedTimestamp}</Text>
 							  <BsCheck2All size={16} fontWeight={"500"}/>
 						  </Flex>
 						  </Box>
@@ -115,8 +115,8 @@ const Message = ({ ownMessage, message }) => {
 		) : (
 			  <Flex gap={2} alignSelf={"flex-end"} >
 				  {message.text && (
-					  <Flex minW={"20"} maxW={"350px"} minH={"12"} bg={"gray.500"} p={1} borderRadius={"md"} flexDirection={"column"}>
-					  	  <Text color={"orange.200"} textDecoration={"underline"} letterSpacing={"wide"} mb={1} fontSize={"xs"} fontWeight={"semibold"}>{message.username}</Text>
+					  <Flex minW={"20"} maxW={"350px"} minH={"12"} bg={"gray.500"} p={2} px={3} borderRadius={"md"} flexDirection={"column"}>
+					  	  <Text color={"white"} textDecoration={"underline"} letterSpacing={"wide"} mb={1} fontSize={"xs"} fontWeight={"semibold"}>{message.username}</Text>
 						  <Text color={"white"} fontSize={"sm"} fontWeight={"normal"}>
 							  {message.text}
 						  </Text>

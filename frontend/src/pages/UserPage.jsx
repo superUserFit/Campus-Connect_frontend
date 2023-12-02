@@ -11,6 +11,7 @@ import postsAtom from "../atoms/postsAtom";
 import userAtom from "../atoms/userAtom";
 import Report from "../AdminComponents/Report";
 import { host } from "../APIRoute/APIRoute.js";
+import LecturerPanel from "../LecturerComponents/LecturerPanel.jsx";
 
 
 const UserPage = () => {
@@ -27,7 +28,7 @@ const UserPage = () => {
 			if (!user) return;
 			setFetchingPosts(true);
 			try {
-				const res = await fetch(`${host}/api/posts/user/${username}`);
+				const res = await fetch(`/api/posts/user/${username}`);
 				const data = await res.json();
 				setPosts(data);
 			} catch (error) {
@@ -45,7 +46,7 @@ const UserPage = () => {
 	useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch(`${host}/api/lecturer/getCourses/${currentUser._id}`, {
+                const response = await fetch(`/api/lecturer/getCourses/${currentUser._id}`, {
                     method: "GET"
                 });
                 const data = await response.json();
@@ -93,27 +94,7 @@ const UserPage = () => {
 		  	<UserHeader user={user} />
 			{user.isAdmin && <Report />}
 			{user.isStudent && <StudentDashboard />}
-			{user.isLecturer && (
-                <Flex flexDirection={"column"} w={"100vw"} justifyContent={"center"} alignItems={"center"}>
-                    <Grid
-                        templateColumns={"1fr 1fr 1fr"}
-                        gap={2}
-                        p={4}
-                        bg={useColorModeValue("wheat", "whiteAlpha.400")}
-                    >
-                        <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight={"medium"} textAlign={"center"} px={3}>Course Code</Box>
-                        <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight={"medium"} textAlign={"center"} px={3}>Course Name</Box>
-                        <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight={"medium"} textAlign={"center"} px={3}>Enrollment Key</Box>
-                        {courses.map((course) => (
-                            <React.Fragment key={course._id}>
-                                <Box p={2} textAlign={"center"} textColor={"black"}>{course.courseCode}</Box>
-                                <Box p={2} textAlign={"center"} textColor={"black"}>{course.courseName}</Box>
-                                <Box p={2} textAlign={"center"} textColor={"black"}>{course.courseKey}</Box>
-                            </React.Fragment>
-                        ))}
-                    </Grid>
-                </Flex>
-			)}
+			{user.isLecturer && <LecturerPanel />}
 		</Box>
 	  );
 };

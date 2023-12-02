@@ -56,7 +56,7 @@ const Message = ({ ownMessage, message }) => {
             			onClose={() => setIsTooltipOpen(false)}
 					>
 						<Flex
-							bg={useColorModeValue("orange.500", "orange.700")}
+							bg={useColorModeValue("orange.300", "orange.700")}
 							minH={"12"}
 							maxW={"350px"}
 							p={1}
@@ -66,14 +66,14 @@ const Message = ({ ownMessage, message }) => {
 							onMouseEnter={() => setIsTooltipOpen(true)}
                 			onMouseLeave={() => setIsTooltipOpen(false)}
 						>
-							<Text fontSize={"sm"} color={"white"} marginLeft={2}>{message.text}</Text>
+							<Text fontSize={"sm"} color={useColorModeValue("black", "whiteAlpha.800")} mt={1} marginLeft={2}>{message.text}</Text>
 							<Box
 								alignSelf={"flex-end"}
 								ml={1}
 								color={message.seen ? "blue.400" : ""}
 							>
 								<Flex flexDirection={"row"} alignSelf={"flex-end"}>
-								<Text fontSize={"xs"} color={"white"} >{formattedTimestamp}</Text>
+								<Text fontSize={"xs"} color={useColorModeValue("black", "whiteAlpha.800")}>{formattedTimestamp}</Text>
 								<BsCheck2All size={16} fontWeight={"500"}/>
 							</Flex>
 							</Box>
@@ -106,7 +106,7 @@ const Message = ({ ownMessage, message }) => {
 							mt={5}
 							w={"240px"}
 							p={"2"}
-							bg={useColorModeValue("orange.400", "orange.700")}
+							bg={useColorModeValue("orange.300", "orange.700")}
 							flexDirection={"column"}
 							onDoubleClick={handleBubbleClick}
 							cursor={"pointer"}
@@ -226,7 +226,7 @@ const Message = ({ ownMessage, message }) => {
 			) : (
 				<Flex gap={2} alignSelf={"flex-end"} >
 					{message.text && (
-    					<Flex minW={"20"} maxW={"350px"} minH={"12"} bg={"gray.400"} p={1} borderRadius={"md"}>
+    					<Flex minW={"20"} maxW={"350px"} minH={"12"} bg={"gray.400"} borderRadius={"md"} p={2} px={3}>
     					    <Text color={"black"} fontSize={"sm"} fontWeight={"normal"}>
     					        {message.text}
     					    </Text>

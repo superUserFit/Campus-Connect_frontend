@@ -10,8 +10,6 @@ import { conversationsAtom, selectedConversationAtom } from "../atoms/messagesAt
 import userAtom from "../atoms/userAtom";
 import { useSocket } from "../context/SocketContext";
 import UserListItem from "../components/UserListItem";
-import { host, getConversationsRoute } from "../APIRoute/APIRoute";
-
 
 
 const ChatPage = () => {

@@ -69,16 +69,6 @@ const Sidebar = () => {
                 </Button>
                 </Tooltip>
 
-                {user.isLecturer ? (
-                    <Tooltip label="Courses" aria-label="Courses" hasArrow placement="right" p={"2"} fontSize={"md"}>
-                    <Button cursor={"pointer"} as={RouterLink} to={`/courses`} rounded={"3xl"} mt={3} bg={useColorModeValue("orange.300", "orange.700")}>
-                        <Link>
-                            <MdCastForEducation size={28} mx={5}/>
-                        </Link>
-                    </Button>
-                    </Tooltip>
-                ): ("")}
-
 {/*
                 <Tooltip label="Community" aria-label="Community" hasArrow placement="right" p={"2"} fontSize={"md"}>
                 <Button cursor={"pointer"} as={RouterLink} to='/community' mt={3} rounded={"3xl"} bg={useColorModeValue("orange.300", "orange.700")}>

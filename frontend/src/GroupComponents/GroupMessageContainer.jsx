@@ -269,20 +269,20 @@ const GroupMessageContainer = () => {
     return (
         <Flex
             flex={"70"}
-            bg={useColorModeValue("orange.300", "gray.dark")}
+            bg={useColorModeValue("whitesmoke", "gray.dark")}
             borderRadius={"md"}
             p={2}
 			position={"relative"}
             flexDirection={"column"}
             overflow={"hidden"}
-            h={"100vh"}
+            minH={"100vh"}
         >
 			{/*		Header		*/}
             <Flex w={"full"} h={12} alignItems={"center"} gap={2} cursor={"pointer"} onClick={() => setOpenModal(true)}>
                 <Avatar src={selectedGroup.groupPic} size={"sm"} ml={"3"} mr={"1"} />
                 <Text fontSize="md">{selectedGroup.groupName}</Text>
             </Flex>
-            <Divider />
+			<Divider h={"0.5"} bg={useColorModeValue("gray.dark", "white")} />
 
             <Flex flexDir={"column"} gap={4} my={4} p={2} height={"67vh"} overflowY={"auto"}>
 				{loadingMessages &&
@@ -320,7 +320,6 @@ const GroupMessageContainer = () => {
 				position="absolute"
         		bottom="0"
         		width="100%"
-        		bg={useColorModeValue("orange.300", "gray.dark")}
         		borderRadius="md"
 			>
 				<MessageInput setMessages={setMessages} />
