@@ -18,6 +18,8 @@ import useShowToast from "../hooks/useShowToast";
 import userAtom from "../atoms/userAtom";
 import Cookies from "js-cookies";
 import Logo from "../assets/images/logo.png";
+import axios from "axios";
+import { host } from "../APIRoute/APIRoute";
 
 
 export default function SignupCard() {
@@ -42,7 +44,7 @@ export default function SignupCard() {
 	  	}
 
 	  	try {
-			const res = await axios.post("/api/users/signup", inputs, {
+			const res = await axios.post(`${host}/api/users/signup`, inputs, {
 			  	headers: {
 					"Content-Type": "application/json",
 			  	},
@@ -61,7 +63,6 @@ export default function SignupCard() {
 			showToast("Error", error.message, "error");
 	  	}
 	};
-
 
 
 	return (

@@ -10,6 +10,7 @@ import {
 import React, { useState, useEffect } from "react";
 import useShowToast from "../hooks/useShowToast.js";
 import axios from "axios";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const ManageDepartment = () => {
@@ -31,7 +32,7 @@ const ManageDepartment = () => {
     // Fetch Departments
     const fetchDepartments = async () => {
         try {
-            const response = await axios.get(`/api/admin/getDepartments`);
+            const response = await axios.get(`${host}/api/admin/getDepartments`);
 
             if (response.status === 200) {
                 const data = response.data;
@@ -48,7 +49,7 @@ const ManageDepartment = () => {
 
     const fetchDiplomas = async () => {
         try {
-            const response = await axios.get(`/api/users/getDiplomas`);
+            const response = await axios.get(`${host}/api/users/getDiplomas`);
 
             if (response.status === 200) {
               const data = response.data;
@@ -82,7 +83,7 @@ const ManageDepartment = () => {
 
         try {
             setIsLoading(true);
-            const response = await axios.post(`/api/admin/createDepartment`, {
+            const response = await axios.post(`${host}/api/admin/createDepartment`, {
               departmentName: departmentName,
             });
 
@@ -109,7 +110,7 @@ const ManageDepartment = () => {
 
         try {
             setIsLoading(true);
-            const response = await axios.post(`/api/admin/addDiploma`, addDiploma);
+            const response = await axios.post(`${host}/api/admin/addDiploma`, addDiploma);
 
             if (response.status === 200) {
               showToast("Success", "Successfully added new diploma", "success");
@@ -134,7 +135,7 @@ const ManageDepartment = () => {
 
         try {
             setIsLoading(true);
-            const response = await axios.post(`/api/admin/addCourse`, addCourses);
+            const response = await axios.post(`${host}/api/admin/addCourse`, addCourses);
 
             if (response.status === 200) {
               showToast("Success", `Successfully Added Courses`, "success");

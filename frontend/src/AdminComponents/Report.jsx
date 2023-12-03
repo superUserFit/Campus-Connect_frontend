@@ -2,6 +2,7 @@ import { Box, Checkbox, Flex, Grid, Spinner, Text, useColorModeValue } from "@ch
 import React, { useEffect, useState } from "react";
 import useShowToast from "../hooks/useShowToast";
 import axios from 'axios';
+import { host } from "../APIRoute/APIRoute";
 
 
 const Report = () => {
@@ -14,7 +15,7 @@ const Report = () => {
     useEffect(() => {
         const getReports = async () => {
             try {
-                const response = await axios.get(`/api/customerService/getReports`, {
+                const response = await axios.get(`${host}/api/customerService/getReports`, {
                   headers: { "Content-Type": "application/json" },
                 });
 

@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import useShowToast from "../hooks/useShowToast";
 import axios from 'axios';
+import { host } from "../APIRoute/APIRoute";
 
 
 const ViewUserAccount = () => {
@@ -20,7 +21,7 @@ const ViewUserAccount = () => {
     useEffect(() => {
         const fetchUserData = async () => {
           try {
-            const response = await axios.get(`/api/admin/getAllUsers`);
+            const response = await axios.get(`${host}/api/admin/getAllUsers`);
             const data = response.data;
             setUserData(data);
           } catch (error) {
@@ -35,7 +36,7 @@ const ViewUserAccount = () => {
 
     const deleteUserAccount = async (userId) => {
         try {
-            const response = await axios.delete(`/api/admin/deleteUser/${userId}`);
+            const response = await axios.delete(`${host}/api/admin/deleteUser/${userId}`);
 
             if (response.status === 200) {
                 // Remove the deleted user from the state

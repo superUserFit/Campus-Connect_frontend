@@ -11,6 +11,7 @@ import userAtom from "../atoms/userAtom";
 import { useSocket } from "../context/SocketContext";
 import UserListItem from "../components/UserListItem";
 import axios from "axios";
+import { host } from "../APIRoute/APIRoute";
 
 
 const ChatPage = () => {
@@ -66,7 +67,7 @@ const ChatPage = () => {
 	useEffect(() => {
 	  	const getConversations = async () => {
 			try {
-			  	const res = await axios.get('/api/messages/conversations');
+			  	const res = await axios.get(`${host}/api/messages/conversations`);
 			  	const data = res.data;
 
 			  	if (data.error) {
@@ -95,7 +96,7 @@ const ChatPage = () => {
 
 	  	try {
 			setLoading(true);
-			const response = await axios.get(`/api/users/getAllUsers`, {
+			const response = await axios.get(`${host}/api/users/getAllUsers`, {
 			  	params: {
 					search: query,
 			  	},

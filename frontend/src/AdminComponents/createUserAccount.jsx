@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import useShowToast from "../hooks/useShowToast";
 import axios from "axios";
+import { host } from "../APIRoute/APIRoute";
 
 
 const createUserAccount = () => {
@@ -29,7 +30,7 @@ const createUserAccount = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post(`/api/admin/createUserAccount`, inputs, {
+            const res = await axios.post(`${host}/api/admin/createUserAccount`, inputs, {
               headers: {
                 "Content-Type": "application/json",
               },
