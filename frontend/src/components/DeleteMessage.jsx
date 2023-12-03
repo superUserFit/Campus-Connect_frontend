@@ -11,13 +11,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import useShowToast from "../hooks/useShowToast.js";
-import { deleteMessageRoute } from "../APIRoute/APIRoute.js";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const DeleteMessage = ({ onClose, messageId }) => {
     const showToast = useShowToast();
     const handleDeleteMessage = async () => {
-        const response = await fetch(`/api/messages/deleteMessage/${messageId}`, {
+        const response = await fetch(`${host}/api/messages/deleteMessage/${messageId}`, {
             method: "DELETE",
         });
 

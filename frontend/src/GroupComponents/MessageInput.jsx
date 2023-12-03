@@ -19,7 +19,7 @@ import { groupAtom, selectedGroupAtom } from "../atoms/groupAtom";
 import usePreviewImg from "../hooks/usePreviewImg";
 import usePreviewDoc from "../hooks/usePreviewDoc";
 import userAtom from "../atoms/userAtom";
-import { groupMessageRoute } from "../APIRoute/APIRoute.js";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const MessageInput = ({ setMessages }) => {
@@ -66,7 +66,7 @@ const MessageInput = ({ setMessages }) => {
 		setIsSending(true);
 
 		try {
-			const res = await fetch(`/api/group/sendGroupMessage`, {
+			const res = await fetch(`${host}/api/group/sendGroupMessage`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

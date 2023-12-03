@@ -10,8 +10,8 @@ import StudentDashboard from "../StudentComponents/StudentDashboard";
 import postsAtom from "../atoms/postsAtom";
 import userAtom from "../atoms/userAtom";
 import Report from "../AdminComponents/Report";
-import { host } from "../APIRoute/APIRoute.js";
 import LecturerPanel from "../LecturerComponents/LecturerPanel.jsx";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const UserPage = () => {
@@ -28,7 +28,7 @@ const UserPage = () => {
 			if (!user) return;
 			setFetchingPosts(true);
 			try {
-				const res = await fetch(`/api/posts/user/${username}`);
+				const res = await fetch(`${host}/api/posts/user/${username}`);
 				const data = await res.json();
 				setPosts(data);
 			} catch (error) {
@@ -46,7 +46,7 @@ const UserPage = () => {
 	useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch(`/api/lecturer/getCourses/${currentUser._id}`, {
+                const response = await fetch(`${host}/api/lecturer/getCourses/${currentUser._id}`, {
                     method: "GET"
                 });
                 const data = await response.json();

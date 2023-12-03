@@ -18,6 +18,8 @@ import { format } from "date-fns";
 import { useState, useEffect } from "react";
 import DeleteMessage from "../components/DeleteMessage";
 
+
+
 const Message = ({ ownMessage, message }) => {
 	const selectedGroup = useRecoilValue(selectedGroupAtom);
 	const user = useRecoilValue(userAtom);

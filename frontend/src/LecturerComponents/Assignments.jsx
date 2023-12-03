@@ -12,6 +12,7 @@ import { useRecoilValue } from "recoil";
 import { FaPlus } from "react-icons/fa";
 import userAtom from "../atoms/userAtom.js";
 import AddAssignments from "./AddAssignments.jsx";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const Assignments = () => {
@@ -42,7 +43,7 @@ const Assignments = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch(`/api/lecturer/getCourses/${user._id}`, {
+                const response = await fetch(`${host}/api/lecturer/getCourses/${user._id}`, {
                     method: "GET"
                 });
                 const data = await response.json();
@@ -57,7 +58,7 @@ const Assignments = () => {
 
 
     const fetchAssignment = async () => {
-        const response = await fetch(`/api/lecturer/getAssignments/${user._id}`, {
+        const response = await fetch(`${host}/api/lecturer/getAssignments/${user._id}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -73,7 +74,7 @@ const Assignments = () => {
 
 
     const handleDeleteAssignment = async (assignmentId) => {
-        const response = await fetch(`/api/lecturer/deleteAssignment/${assignmentId}`,{
+        const response = await fetch(`${host}/api/lecturer/deleteAssignment/${assignmentId}`,{
             method: "DELETE"
         });
 

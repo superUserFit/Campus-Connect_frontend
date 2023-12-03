@@ -5,6 +5,7 @@ import useShowToast from "../hooks/useShowToast";
 import { FiLogOut } from "react-icons/fi";
 import Cookies from "js-cookies";
 import { useNavigate } from "react-router-dom";
+import { host } from "../APIRoute/APIRoute";
 
 
 const LogoutButton = () => {
@@ -14,7 +15,7 @@ const LogoutButton = () => {
 
 	const handleLogout = async () => {
 		try {
-			const res = await fetch(`/api/users/logout`, {
+			const res = await fetch(`${host}/api/users/logout`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

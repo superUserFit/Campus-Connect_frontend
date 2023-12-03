@@ -20,6 +20,7 @@ import messageSound from "../assets/sounds/message.mp3";
 import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import GroupAddUser from "./GroupAddUser";
 import usePreviewImg from "../hooks/usePreviewImg";
+import { host } from "../APIRoute/APIRoute";
 
 
 const GroupMessageContainer = () => {
@@ -97,7 +98,7 @@ const GroupMessageContainer = () => {
             try {
 				if(selectedGroup.mock) return;
 
-                const res = await fetch(`/api/group/${selectedGroup._id}`);
+                const res = await fetch(`${host}/api/group/${selectedGroup._id}`);
                 const data = await res.json();
 
                 if (data.error) {
@@ -121,7 +122,7 @@ const GroupMessageContainer = () => {
 	const handleRenameGroup = async () => {
 		try {
 			setLoading(true);
-			const response = await fetch(`/api/group/renameGroup`, {
+			const response = await fetch(`${host}/api/group/renameGroup`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -160,7 +161,7 @@ const GroupMessageContainer = () => {
 
 		try {
 			setLoading(true);
-			const response = await fetch("/api/group/removeUserFromGroup", {
+			const response = await fetch(`${host}/api/group/removeUserFromGroup`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -196,7 +197,7 @@ const GroupMessageContainer = () => {
 	const handleLeaveGroup = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`/api/group/leaveGroup`, {
+            const response = await fetch(`${host}/api/group/leaveGroup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -231,7 +232,7 @@ const GroupMessageContainer = () => {
 	const handleDeleteGroup = async () => {
 		try {
 			setLoading(true);
-			const response = await fetch(`/api/group/removeGroup/${selectedGroup._id}`, {
+			const response = await fetch(`${host}/api/group/removeGroup/${selectedGroup._id}`, {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",

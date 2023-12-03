@@ -40,7 +40,7 @@ const CourseActivity = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch(`/api/lecturer/getCourses/${user._id}`, {
+                const response = await fetch(`${host}/api/lecturer/getCourses/${user._id}`, {
                     method: "GET"
                 });
                 const data = await response.json();
@@ -56,7 +56,7 @@ const CourseActivity = () => {
 
     useEffect(() => {
         const getAllCourses = async () => {
-            const response = await fetch(`/api/lecturer/getAllCourses`, {
+            const response = await fetch(`${host}/api/lecturer/getAllCourses`, {
                 method: "GET"
             });
 
@@ -79,7 +79,7 @@ const CourseActivity = () => {
         }
         try {
             setLoading(true)
-            const response = await fetch(`/api/lecturer/addCourse`, {
+            const response = await fetch(`${host}/api/lecturer/addCourse`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -106,7 +106,7 @@ const CourseActivity = () => {
 
     const deleteCourse = async (courseId) => {
         try {
-            const response = await fetch(`/api/lecturer/deleteCourse/${courseId}`, {
+            const response = await fetch(`${host}/api/lecturer/deleteCourse/${courseId}`, {
                 method: "DELETE",
             });
 

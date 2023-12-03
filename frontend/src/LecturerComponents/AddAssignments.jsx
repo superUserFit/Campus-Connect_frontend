@@ -11,6 +11,7 @@ import React, { useState, useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const AddAssignments = ({ isOpen, onClose }) => {
@@ -42,7 +43,7 @@ const AddAssignments = ({ isOpen, onClose }) => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch(`/api/lecturer/getCourses/${user._id}`, {
+                const response = await fetch(`${host}/api/lecturer/getCourses/${user._id}`, {
                     method: "GET"
                 });
                 const data = await response.json();
@@ -66,7 +67,7 @@ const AddAssignments = ({ isOpen, onClose }) => {
 
         try {
             setLoading(true);
-            const response = await fetch(`/api/lecturer/addAssignment`, {
+            const response = await fetch(`${host}/api/lecturer/addAssignment`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({...inputs, dueDate: formattedDate})

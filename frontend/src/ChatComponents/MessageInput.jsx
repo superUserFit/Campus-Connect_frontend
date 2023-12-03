@@ -19,7 +19,7 @@ import { BsFillImageFill } from "react-icons/bs";
 import usePreviewImg from "../hooks/usePreviewImg";
 import usePreviewDoc from "../hooks/usePreviewDoc";
 import usePreviewVid from "../hooks/usePreviewVideo";
-import { sendMessageRoute } from "../APIRoute/APIRoute.js";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const MessageInput = ({ setMessages }) => {
@@ -67,7 +67,7 @@ const MessageInput = ({ setMessages }) => {
 		setIsSending(true);
 
 		try {
-			const res = await fetch(`/api/messages`, {
+			const res = await fetch(`${host}/api/messages`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

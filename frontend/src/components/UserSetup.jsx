@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import userAtom from "../atoms/userAtom";
 import useShowToast from "../hooks/useShowToast.js";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const UserSetup = ({ isOpen, onClose }) => {
@@ -29,7 +30,7 @@ const UserSetup = ({ isOpen, onClose }) => {
     useEffect(() => {
         const fetchDepartments = async () => {
             try {
-                const response = await fetch('/api/users/getDepartments');
+                const response = await fetch(`${host}/api/users/getDepartments`);
                 if (response.ok) {
                     const data = await response.json();
                     setDepartments(data);
@@ -48,7 +49,7 @@ const UserSetup = ({ isOpen, onClose }) => {
     //      Fetch Diplomas from database
     useEffect(() => {
         const fetchDiplomas = async () => {
-            const response = await fetch(`/api/users/getDiplomas`);
+            const response = await fetch(`${host}/api/users/getDiplomas`);
 
             if(response.ok) {
                 const data = await response.json();
@@ -70,7 +71,7 @@ const UserSetup = ({ isOpen, onClose }) => {
 
         try {
             setLoading(true);
-            const response = await fetch(`/api/users/setupUser`, {
+            const response = await fetch(`${host}/api/users/setupUser`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(selectedDetails)

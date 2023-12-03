@@ -16,7 +16,7 @@ import useShowToast from "../hooks/useShowToast";
 import userAtom from "../atoms/userAtom";
 import { groupAtom } from "../atoms/groupAtom";
 import UserListItem from "../components/UserListItem";
-import { createGroupRoute, host, joinGroupRoute } from "../APIRoute/APIRoute.js";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const GroupModal = ({ onClose }) => {
@@ -41,7 +41,7 @@ const GroupModal = ({ onClose }) => {
 
 		try {
 			setLoading(true);
-			const response = await fetch(`/api/users/getAllUsers?search=${query}`);
+			const response = await fetch(`${host}/api/users/getAllUsers?search=${query}`);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -75,7 +75,7 @@ const GroupModal = ({ onClose }) => {
 		setLoading(true);
 
 		try {
-			const response = await fetch(`/api/group/createGroupChat`, {
+			const response = await fetch(`${host}/api/group/createGroupChat`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -123,7 +123,7 @@ const GroupModal = ({ onClose }) => {
 
 		try {
 			setLoading(true);
-			const response = await fetch(`/api/group/joinGroup`, {
+			const response = await fetch(`${host}/api/group/joinGroup`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ groupCode })

@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import userAtom from "../atoms/userAtom";
 import { useRecoilState } from "recoil";
 import { selectedConversationAtom } from "../atoms/messagesAtom";
+import { host } from "../APIRoute/APIRoute";
 
 
 const SocketContext = createContext();
@@ -20,7 +21,7 @@ export const SocketContextProvider = ({ children }) => {
 	const [selectedConversation] = useRecoilState(selectedConversationAtom);
 
 	useEffect(() => {
-		const newSocket = io("https://campus-connect-backend-t60k.onrender.com", {
+		const newSocket = io(host, {
 			query: {
 				userId: user?._id,
 			},

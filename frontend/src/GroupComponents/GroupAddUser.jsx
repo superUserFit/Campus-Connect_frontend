@@ -21,7 +21,7 @@ import useShowToast from "../hooks/useShowToast";
 import userAtom from "../atoms/userAtom";
 import UserListItem from "../components/UserListItem";
 import { selectedGroupAtom } from "../atoms/groupAtom";
-import { addUserRoute, host } from "../APIRoute/APIRoute.js";
+import { host } from "../APIRoute/APIRoute.js";
 
 const GroupAddUser = ({ children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,7 +42,7 @@ const GroupAddUser = ({ children }) => {
 
 		try {
 			setLoading(true);
-			const response = await fetch(`/api/users/getAllUsers?search=${query}`);
+			const response = await fetch(`${host}/api/users/getAllUsers?search=${query}`);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -89,7 +89,7 @@ const GroupAddUser = ({ children }) => {
 
         try {
             setLoading(true);
-            const response = await fetch(`/api/group/addUser`, {
+            const response = await fetch(`${host}/api/group/addUser`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

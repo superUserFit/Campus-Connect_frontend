@@ -82,7 +82,7 @@ const GroupPage = () => {
 	useEffect(() => {
 		const getAllGroups = async () => {
 			try {
-				const res = await fetch(`/api/group/getAllGroups`);
+				const res = await fetch(`${host}/api/group/getAllGroups`);
 				const data = await res.json();
 
 				if (data.error) {

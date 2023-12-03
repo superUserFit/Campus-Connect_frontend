@@ -8,7 +8,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import userAtom from "../atoms/userAtom";
 import { useSocket } from "../context/SocketContext.jsx";
 import messageSound from "../assets/sounds/message.mp3";
-import { sendMessageRoute } from "../APIRoute/APIRoute.js";
+import { host } from "../APIRoute/APIRoute.js";
 
 
 const MessageContainer = () => {
@@ -91,7 +91,7 @@ const MessageContainer = () => {
 			try {
 				if (selectedConversation.mock) return;
 
-				const res = await fetch(`/api/messages/${selectedConversation.userId}`);
+				const res = await fetch(`${host}/api/messages/${selectedConversation.userId}`);
 				const data = await res.json();
 
 				if (data.error) {

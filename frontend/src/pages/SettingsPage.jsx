@@ -13,7 +13,7 @@ import usePreviewImg from "../hooks/usePreviewImg";
 import useShowToast from "../hooks/useShowToast";
 import Cookies from "js-cookies";
 import UserSetup from "../components/UserSetup";
-
+import { host } from "../APIRoute/APIRoute";
 
 
 const SettingsPage = () => {
@@ -39,7 +39,7 @@ const SettingsPage = () => {
 		if (updating) return;
 		setUpdating(true);
 		try {
-			const res = await fetch(`/api/users/update/${user._id}`, {
+			const res = await fetch(`${host}/api/users/update/${user._id}`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -60,6 +60,7 @@ const SettingsPage = () => {
 			setUpdating(false);
 		}
 	};
+
 
 	return (
 		<Box bg={useColorModeValue("white", "gray.900")} h={"100vh"}>
