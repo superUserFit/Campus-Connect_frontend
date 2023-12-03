@@ -61,7 +61,7 @@ const createUserAccount = () => {
     return (
         <>
             <Flex
-                bg={useColorModeValue("orange.300", "orange.600")}
+                bg={useColorModeValue("whitesmoke", "gray.dark")}
                 p={"6"}
                 justifyContent={"center"}
                 flexDirection={"column"}
@@ -74,7 +74,7 @@ const createUserAccount = () => {
                         <FormLabel fontWeight={"medium"}>NRIC:</FormLabel>
                         <Input
                             border={"none"}
-                            bg={useColorModeValue("gray.200", "whiteAlpha.600")}
+                            bg={useColorModeValue("gray.300", "whiteAlpha.600")}
                             color={"black"}
                             autoComplete="nope"
                             value={inputs.nric}
@@ -86,7 +86,7 @@ const createUserAccount = () => {
                         <FormLabel fontWeight={"medium"}>Username:</FormLabel>
                         <Input
                             border={"none"}
-                            bg={useColorModeValue("gray.200", "whiteAlpha.600")}
+                            bg={useColorModeValue("gray.300", "whiteAlpha.600")}
                             color={"black"}
                             autoComplete="nope"
                             value={inputs.username}
@@ -100,7 +100,7 @@ const createUserAccount = () => {
                         <FormLabel fontWeight={"medium"}>Email:</FormLabel>
                         <Input
                             border={"none"}
-                            bg={useColorModeValue("gray.200", "whiteAlpha.600")}
+                            bg={useColorModeValue("gray.300", "whiteAlpha.600")}
                             color={"black"}
                             autoComplete="nope"
                             value={inputs.email}
@@ -113,7 +113,7 @@ const createUserAccount = () => {
                     <FormControl mx={2}>
                         <FormLabel fontWeight={"medium"}>Access Level:</FormLabel>
                         <Select
-                            bg={useColorModeValue("gray.200", "whiteAlpha.600")}
+                            bg={useColorModeValue("gray.300", "whiteAlpha.600")}
                             color={"black"}
                             value={inputs.access}
                             onChange={(e) => setInputs((inputs) => ({...inputs, access: e.target.value}))}
@@ -129,7 +129,7 @@ const createUserAccount = () => {
                         <Input
                             border={"none"}
                             type="password"
-                            bg={useColorModeValue("gray.200", "whiteAlpha.600")}
+                            bg={useColorModeValue("gray.300", "whiteAlpha.600")}
                             color={"black"}
                             autoComplete="nope"
                             value={inputs.password}
@@ -139,7 +139,7 @@ const createUserAccount = () => {
                 </Flex>
 
                 <Button
-                    bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.700")}
+                    bg={useColorModeValue("gray.300", "whiteAlpha.700")}
                     color={"black"}
                     my={2}
                     isLoading={loading}

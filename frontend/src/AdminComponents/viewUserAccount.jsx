@@ -33,7 +33,7 @@ const ViewUserAccount = () => {
 
     const deleteUserAccount = async (userId) => {
         try {
-            const response = await fetch(`$/api/admin/deleteUser/${userId}`, {
+            const response = await fetch(`/api/admin/deleteUser/${userId}`, {
                 method: "DELETE",
             });
 
@@ -65,7 +65,7 @@ const ViewUserAccount = () => {
                     p={4}
                     maxH={"70vh"}
                     overflowY={"auto"}
-                    bg={useColorModeValue("wheat", "gray.600")}
+                    bg={useColorModeValue("white", "gray.800")}
                 >
                 <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight="bold" textAlign="center">User ID</Box>
                 <Box bg={useColorModeValue("orange.300", "orange.600")} p={1} fontWeight="bold" textAlign="center">Username</Box>

@@ -19,6 +19,8 @@ const LecturerPage = () => {
             return <CourseActivity />;
         }
     }
+
+
     return (
         <Box h={"100vh"} overflowY={"auto"}>
         <Flex justifyContent={"center"} alignItems={"center"} flexDirection={"column"} position={"relative"}>

@@ -40,6 +40,7 @@ const ChatPage = () => {
 		}
 	}, [conversations]);
 
+
 	useEffect(() => {
 		socket?.on("messagesSeen", ({ conversationId }) => {
 			setConversations((prev) => {
@@ -59,6 +60,7 @@ const ChatPage = () => {
 			});
 		});
 	}, [socket, setConversations]);
+
 
 	useEffect(() => {
 		const getConversations = async () => {
@@ -80,6 +82,7 @@ const ChatPage = () => {
 
 		getConversations();
 	}, [showToast, setConversations]);
+
 
 	const handleConversationSearch = async (query) => {
 		setSearch(query);
@@ -106,6 +109,7 @@ const ChatPage = () => {
 			setConversations((prevConvs) => [...prevConvs]);
 		}
 	};
+
 
 	const handleSelectConversation = (conversation) => {
 		setSearch(false);

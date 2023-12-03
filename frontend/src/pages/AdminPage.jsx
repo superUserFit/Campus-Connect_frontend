@@ -30,8 +30,9 @@ const AdminPage = () => {
             <Flex
                 justifyContent={"center"}
                 alignItems={"center"}
-                bg={useColorModeValue("orange.300", "orange.600")}
-                w={"100%"}
+                bg={useColorModeValue("whitesmoke", "gray.dark")}
+                w={"full"}
+                h={"full"}
                 pb={5}
                 flexDirection={"column"}
             >

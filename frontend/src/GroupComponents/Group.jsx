@@ -42,7 +42,7 @@ const Group = ({ group }) => {
                 })
             }}
 			bg= {
-  			   	   selectedGroup?._id === group._id ? useColorModeValue("orange.300", "orange.600"): useColorModeValue("whiteAlpha.500", "gray.700")
+  			   	   selectedGroup?._id === group._id ? useColorModeValue("orange.300", "orange.700"): useColorModeValue("whiteAlpha.500", "gray.700")
   				}
             borderRadius={"md"}
         >

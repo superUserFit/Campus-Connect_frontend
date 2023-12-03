@@ -81,7 +81,7 @@ const UserPage = () => {
 
 	if (!user.department && !user.diploma) {
 		return (
-			<Flex justifyContent={"center"} alignItems={"center"} bg={useColorModeValue("orange.300", "orange.700")} h={"100vh"}>
+			<Flex justifyContent={"center"} alignItems={"center"} bg={useColorModeValue("gray.200", "blackAlpha.700")} h={"100vh"}>
 				<Box>
 					<Text fontSize={"2xl"} fontWeight={"semibold"}>User may have not update their department and diploma</Text>
 					<Text fontSize={"2xl"} fontWeight={"semibold"}>Please update your department and diploma in settings</Text>

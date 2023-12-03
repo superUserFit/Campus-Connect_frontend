@@ -64,7 +64,7 @@ const CustomerServicePage = () => {
                 flexDirection={"column"}
                 justifyContent={"center"}
                 alignItems={"center"}
-                bg={useColorModeValue("orange.300", "orange.600")}
+                bg={useColorModeValue("whiteAlpha.700", "blackAlpha.400")}
                 w={"100%"}
             >
                 <Text fontSize="3xl" fontWeight={"bold"}>
@@ -84,7 +84,7 @@ const CustomerServicePage = () => {
                 gap={"10"}
                 mr={"12"}
             >
-                <Flex flexDirection={"row"} bg={useColorModeValue("orange.300", "orange.600")} p={"5"} rounded={"xl"} h={"50vh"} w={"50%"}>
+                <Flex flexDirection={"row"} bg={useColorModeValue("white", "black")} p={"5"} rounded={"xl"} h={"50vh"} w={"50%"}>
                     <Flex flexDirection={"row"} mb={"16"} alignItems="center">
                         <Flex flexDirection={"column"}>
                             <Text fontSize="2xl" textAlign={"start"}>Hello, Campus Connect</Text>
@@ -106,7 +106,7 @@ const CustomerServicePage = () => {
                     </Flex>
                 </Flex>
 
-                <Flex bg={useColorModeValue("orange.300", "orange.600")} p={"5"} rounded={"2xl"} flexDirection={"column"} w={"50%"}>
+                <Flex bg={useColorModeValue("white", "black")} p={"5"} rounded={"2xl"} flexDirection={"column"} w={"50%"}>
                 <Flex flexDirection={"row"} mt={"2"} alignItems="center">
                     <Text fontSize={"md"}>Subject: </Text>
                     <Input
@@ -129,7 +129,7 @@ const CustomerServicePage = () => {
                 <Flex flexDirection={"column"} mt={"8"}>
                     <Text fontSize={"md"}>Description: </Text>
                     <Textarea w={"100%"} h={"10rem"} bg={useColorModeValue("gray.200", "gray.dark")} value={report.description} onChange={(e) => setReport((report) => ({...report, description: e.target.value}))} />
-                    <Button isLoading={loading} my={4} bg={useColorModeValue("white", "gray.800")} onClick={handleSubmit}>Submit</Button>
+                    <Button isLoading={loading} my={4} bg={useColorModeValue("gray.300", "gray.800")} onClick={handleSubmit}>Submit</Button>
                 </Flex>
             </Flex>
             </Flex>

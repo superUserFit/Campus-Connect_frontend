@@ -174,19 +174,19 @@ const ManageDepartment = () => {
                 {/* Add Department */}
                 <Box
                     w={"30vw"}
-                    bg={useColorModeValue("orange.300", "orange.600")}
+                    bg={useColorModeValue("white", "gray.800")}
                     p={4}
                     rounded={"xl"}
                 >
                     <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>Create Department</Text>
-                    <Input placeholder="Create New Department" bg={useColorModeValue("white", "gray.200")} textColor={"black"} value={departmentName} onChange={(e) => setDepartmentName(e.target.value)} my={2} />
-                    <Button bg={useColorModeValue("whitesmoke", "gray.200")} textColor={"black"} w={"100%"} onClick={handleCreateDepartment} isLoading={loading}>Create Department</Button>
+                    <Input placeholder="Create New Department" bg={useColorModeValue("gray.300", "whiteAlpha.300")} textColor={useColorModeValue("black", "white")} value={departmentName} onChange={(e) => setDepartmentName(e.target.value)} my={2} />
+                    <Button bg={useColorModeValue("gray.300", "whiteAlpha.800")} textColor={"black"} w={"100%"} onClick={handleCreateDepartment} isLoading={loading}>Create Department</Button>
                 </Box>
 
                 {/* Add Diploma */}
                 <Box
                     w={"30vw"}
-                    bg={useColorModeValue("orange.300", "orange.600")}
+                    bg={useColorModeValue("white", "gray.800")}
                     p={4}
                     my={4}
                     rounded={"xl"}
@@ -194,8 +194,8 @@ const ManageDepartment = () => {
                     <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>Add Diploma</Text>
                     <Select
                         my={2}
-                        bg={useColorModeValue("white", "gray.200")}
-                        textColor={"black"}
+                        bg={useColorModeValue("gray.300", "whiteAlpha.300")}
+                        textColor={useColorModeValue("black", "white")}
                         value={addDiploma.department} onChange={(e) => setAddDiploma((addDiploma) => ({...addDiploma, department: e.target.value}))}
                     >
                         <option
@@ -209,19 +209,19 @@ const ManageDepartment = () => {
                     <Input
                         placeholder="Add New Diploma"
                         mb={2}
-                        bg={useColorModeValue("white", "gray.200")}
-                        textColor={"black"}
+                        bg={useColorModeValue("gray.300", "whiteAlpha.300")}
+                        textColor={useColorModeValue("black", "white")}
                         value={addDiploma.diplomaName}
                         onChange={(e) => setAddDiploma((addDiploma) => ({...addDiploma, diplomaName: e.target.value}))}
                     />
-                    <Button w={"100%"} isLoading={loading} onClick={handleAddDiploma}>Add Diploma</Button>
+                    <Button bg={useColorModeValue("gray.300", "whiteAlpha.800")} textColor={"black"} w={"100%"} isLoading={loading} onClick={handleAddDiploma}>Add Diploma</Button>
                 </Box>
             </Flex>
 
             {/*     Add Courses     */}
             <Box
                 w={"40vw"}
-                bg={useColorModeValue("orange.300", "orange.600")}
+                bg={useColorModeValue("white", "gray.800")}
                 p={4}
                 my={4}
                 rounded={"xl"}
@@ -230,8 +230,8 @@ const ManageDepartment = () => {
                 <Flex>
                     <Select
                         my={2}
-                        bg={useColorModeValue("white", "gray.200")}
-                        textColor={"black"}
+                        bg={useColorModeValue("gray.300", "whiteAlpha.300")}
+                        textColor={useColorModeValue("black", "white")}
                         mx={2}
                         value={addCourses.diploma} onChange={(e) => setAddCourses((addCourses) => ({...addCourses, diploma: e.target.value}))}
                     >
@@ -247,8 +247,8 @@ const ManageDepartment = () => {
                         placeholder="Course Code"
                         mb={2}
                         mx={2}
-                        bg={useColorModeValue("white", "gray.200")}
-                        textColor={"black"}
+                        bg={useColorModeValue("gray.300", "whiteAlpha.300")}
+                        textColor={useColorModeValue("black", "white")}
                         value={addCourses.courseCode}
                         onChange={(e) => setAddCourses((addCourses) => ({...addCourses, courseCode: e.target.value}))}
                     />
@@ -257,13 +257,13 @@ const ManageDepartment = () => {
                         placeholder="Course Name"
                         mb={2}
                         mx={2}
-                        bg={useColorModeValue("white", "gray.200")}
-                        textColor={"black"}
+                        bg={useColorModeValue("gray.300", "whiteAlpha.300")}
+                        textColor={useColorModeValue("black", "white")}
                         value={addCourses.courseName}
                         onChange={(e) => setAddCourses((addCourses) => ({...addCourses, courseName: e.target.value}))}
                     />
                 </Flex>
-                <Button w={"100%"} isLoading={loading} onClick={handleAddCourse}>Add Course</Button>
+                <Button bg={useColorModeValue("gray.300", "whiteAlpha.800")} textColor={"black"} w={"100%"} isLoading={loading} onClick={handleAddCourse}>Add Course</Button>
             </Box>
         </Flex>
     );
