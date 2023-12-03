@@ -8,7 +8,7 @@ const AuthPage = () => {
 	const authScreenState = useRecoilValue(authScreenAtom);
 
 	return (
-		<Flex justifyContent={"center"} mt={4}>
+		<Flex justifyContent={"center"} alignItems={"center"} mt={2}>
 			{authScreenState === "login" ? <LoginCard /> : <SignupCard />}
 		</Flex>
 	);
