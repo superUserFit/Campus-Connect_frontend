@@ -77,12 +77,6 @@ export default function LoginCard() {
 		setLoading(true);
 
 		try {
-			const res = await axios.post("https://campus-connect-backend-t60k.onrender.com/api/users/login", inputs, {
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
 			if (res.status === 200) {
 				const data = await res.data;
 				if (data.error) {
