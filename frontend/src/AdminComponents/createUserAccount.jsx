@@ -117,6 +117,7 @@ const createUserAccount = () => {
                             color={"black"}
                             value={inputs.access}
                             onChange={(e) => setInputs((inputs) => ({...inputs, access: e.target.value}))}
+                            placeholder="Select Access Level"
                         >
                             <option value={"Student"}>Student</option>
                             <option value={"Lecturer"}>Lecturer</option>

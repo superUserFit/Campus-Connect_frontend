@@ -1,17 +1,13 @@
 import {
-	Flex,
-	Box,
-	FormControl,
-	FormLabel,
-	Input,
-	InputGroup,
-	HStack,
-	InputRightElement,
-	Stack,
-	Button,
-	Heading,
-	useColorModeValue,
-	Link,
+	Center, Text,
+	Box, FormControl,
+	FormLabel, Input,
+	HStack, Card,
+	CardBody, Image,
+	Link, Stack,
+	VStack, Button,
+	Heading, useColorModeValue,
+	Flex
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -21,7 +17,7 @@ import authScreenAtom from "../atoms/authAtom";
 import useShowToast from "../hooks/useShowToast";
 import userAtom from "../atoms/userAtom";
 import Cookies from "js-cookies";
-
+import Logo from "../assets/images/logo.png";
 
 
 export default function SignupCard() {
@@ -66,133 +62,115 @@ export default function SignupCard() {
 		}
 	};
 
+
 	return (
-		<Flex  direction={"column"} align={"center"} justify={"center"} h={"100vh"} mt={5} overflowX={"hidden"}>
-			<Stack direction={"row"} spacing={4} mb={2}>
-				<Button
-        		    maxW={"5xl"}
-        		    bg={"orange.500"}
-        		    py={8}
-        		    px={16}
-        		    onClick={() => setAuthScreen("signup")}
-        		>
-            		<Link as={RouterLink} to={"/auth"}>
-            		    Sign up
-            		</Link>
-        		</Button>
-
-				<Button
-            		maxW={"5xl"}
-            		py={8}
-            		px={16}
-            		bg={"orange.500"}
-            		onClick={() => setAuthScreen("login")}
-        		>
-            		<Link as={RouterLink} to={"/auth"} >
-            		    Login
-            		</Link>
-        		</Button>
-			</Stack>
-			<Stack spacing={8} mx={"auto"} maxW={"lg"} bg={useColorModeValue("orange.400", "orange.600")} rounded={"3xl"}>
-				<Stack align={"center"}>
-					<Heading fontSize={"2xl"} textAlign={"center"} pt={5}>
-						Sign up
-					</Heading>
-				</Stack>
-				<Box rounded={"lg"} boxShadow={"lg"} p={8}>
-					<Stack spacing={4}>
-						<HStack>
-							<Box>
-								<FormControl isRequired>
-									<FormLabel>NRIC</FormLabel>
-									<Input
+		<Flex justifyContent={"center"} bg={"blackAlpha.300"} px={12} rounded={"2xl"} py={8}>
+		  	<Stack spacing='4'>
+				<VStack justifyContent={"center"} spacing='5'>
+					<Image mt={"-12"} src={Logo} rounded={"full"} w={16} h={"auto"} />
+				  	<Heading
+						fontWeight={"bold"}
+						fontSize='1.5em'
+						letterSpacing='-0.5px'
+				  	>
+						Create Account
+				  	</Heading>
+				</VStack>
+				<Card bg={useColorModeValue("whitesmoke", "gray.dark")} variant='outline' borderColor={"white"} w={"full"}>
+				  	<CardBody>
+						<Stack spacing='4'>
+							<Flex columnGap={8}>
+								<FormControl>
+								  	<FormLabel size='md'>NRIC</FormLabel>
+								  	<Input
 										type='text'
-										onChange={(e) => setInputs({ ...inputs, nric: e.target.value })}
+										bg={useColorModeValue("gray.300", "gray.800")}
+										borderColor={"blackAlpha.400"}
+										size='sm'
+										borderRadius='6px'
 										value={inputs.nric}
-										bg={"whiteAlpha.600"}
-										textColor={"black"}
-									/>
+										onChange={(e) => setInputs((inputs) => ({...inputs, nric: e.target.value}))}
+								  	/>
 								</FormControl>
-							</Box>
-							<Box>
-								<FormControl isRequired>
-									<FormLabel>Username</FormLabel>
-									<Input
+								<FormControl>
+								<FormLabel size={"md"}>Username</FormLabel>
+								  	<Input
 										type='text'
-										onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+										bg={useColorModeValue("gray.300", "gray.800")}
+										borderColor={"blackAlpha.400"}
+										size='sm'
+										borderRadius='6px'
 										value={inputs.username}
-										bg={"whiteAlpha.600"}
-										textColor={"black"}
-									/>
+										onChange={(e) => setInputs((inputs) => ({...inputs, username: e.target.value}))}
+								  	/>
 								</FormControl>
-							</Box>
-						</HStack>
-						<FormControl isRequired>
-							<FormLabel>Email address</FormLabel>
-							<Input
-								type='email'
-								onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-								value={inputs.email}
-								bg={useColorModeValue("whitesmoke", "whiteAlpha.400")}
-							/>
-						</FormControl>
-						<FormControl isRequired>
-							<HStack spacing={2}>
-							    <Box flex="1">
-							      	<FormLabel>Password</FormLabel>
-							      	<InputGroup>
-							        	<Input
-							          		type={showPassword ? "text" : "password"}
-							          		onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
-							          		value={inputs.password}
-											bg={"whiteAlpha.600"}
-											textColor={"black"}
-							        	/>
-							      	</InputGroup>
-							    </Box>
-							    <Box flex="1">
-							      	<FormLabel>Confirm Password</FormLabel>
-							      	<InputGroup>
-							        	<Input
-							          		type={showPassword ? "text" : "password"}
-							          		onChange={(e) => setConfirmPassword(e.target.value)}
-							          		value={confirmPassword}
-									  		bg={"whiteAlpha.600"}
-											textColor={"black"}
-							        	/>
-										<InputRightElement h="full">
-							        	  	<Button
-							        	    	variant="ghost"
-							        	    	onClick={() => setShowPassword((showPassword) => !showPassword)}
-							        	  	>{showPassword ? <ViewIcon /> : <ViewOffIcon />}
-							        	  	</Button>
-							        	</InputRightElement>
-							      	</InputGroup>
-							    </Box>
-							</HStack>
-							</FormControl>
+							</Flex>
 
-						<Stack spacing={10} pt={2}>
+							<FormControl>
+								<FormLabel size={"md"}>Email</FormLabel>
+								<Input
+									type='email'
+									bg={useColorModeValue("gray.300", "gray.800")}
+									borderColor={"blackAlpha.400"}
+									size='sm'
+									borderRadius='6px'
+									value={inputs.email}
+									onChange={(e) => setInputs((inputs) => ({...inputs, email: e.target.value}))}
+								/>
+							</FormControl>
+							<Flex columnGap={8}>
+								<FormControl>
+								  	<FormLabel size='sm'>Password</FormLabel>
+								  	<Input
+										type='password'
+										bg={useColorModeValue("gray.300", "gray.800")}
+										borderColor={"blackAlpha.400"}
+										size='sm'
+										borderRadius='6px'
+										value={inputs.password}
+										onChange={(e) => setInputs((inputs) => ({...inputs, password: e.target.value}))}
+								  	/>
+								</FormControl>
+								<FormControl>
+								<FormLabel size='sm'>Confirm Password</FormLabel>
+								  <Input
+									type='password'
+									bg={useColorModeValue("gray.300", "gray.800")}
+									borderColor={"blackAlpha.400"}
+									size='sm'
+									borderRadius='6px'
+									value={confirmPassword}
+									onChange={(e) => setConfirmPassword(e.target.value)}
+								  />
+								</FormControl>
+							</Flex>
 							<Button
-								loadingText='Submitting'
-								size='lg'
-								bg={useColorModeValue("orange.500", "orange.700")}
-								color={"white"}
-								_hover={{
-									bg: useColorModeValue("orange.700", "orange.400"),
-								}}
-								as={RouterLink}
-								onClick={handleSignup}
-								to={'/setup'}
+							  bg={useColorModeValue("orange.300", "orange.600")}
+							  color={useColorModeValue("black", "white")}
+							  size='sm'
+							  _hover={{ bg: "whatsapp.600" }}
+							  _active={{ bg: "whatsapp.600" }}
+							  onClick={handleSignup}
 							>
-							<Link>
-								Sign up
-							</Link>
+							  Sign in
 							</Button>
 						</Stack>
-					</Stack>
-				</Box>
-			</Stack>
+				  	</CardBody>
+				</Card>
+
+				<Card variant='outline' borderColor='#d0d7de'>
+				  	<CardBody>
+					<Center>
+					  	<HStack fontSize='md' spacing='5'>
+							<Text>Already have an account? Login now</Text>
+							<Link color={"orange.600"} as={RouterLink} to={'/login'} onClick={() => setAuthScreen("login")}>
+							  	Login
+							</Link>
+					  	</HStack>
+					</Center>
+				  </CardBody>
+				</Card>
+		  	</Stack>
 		</Flex>
 	);
 }

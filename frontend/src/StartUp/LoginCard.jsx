@@ -1,34 +1,35 @@
 import {
 	Flex, Modal,
-	Box, ModalBody,
+	VStack, ModalBody,
 	FormControl, ModalContent,
 	FormLabel, ModalOverlay,
 	Input, Text,
-	InputGroup, Select,
-	InputRightElement, Link,
+	Card, Select,
+	CardBody, Link,
 	Stack, useColorModeValue,
 	Button, Heading,
 	useDisclosure, ModalHeader,
-	ModalCloseButton
+	ModalCloseButton, Center,
+	HStack, Image
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useSetRecoilState } from "recoil";
 import { Link as RouterLink } from "react-router-dom";
 import authScreenAtom from "../atoms/authAtom";
 import useShowToast from "../hooks/useShowToast";
 import userAtom from "../atoms/userAtom";
 import Cookies from "js-cookies";
+import Logo from "../assets/images/logo.png";
+
 
 export default function LoginCard() {
-	const [showPassword, setShowPassword] = useState(false);
 	const setAuthScreen = useSetRecoilState(authScreenAtom);
 	const setUser = useSetRecoilState(userAtom);
 	const [loading, setLoading] = useState(false);
 	const { onClose, onOpen } = useDisclosure();
 	const [openModal, setOpenModal] = useState(false);
 	const [inputs, setInputs] = useState({
-		username: "",
+		email: "",
 		password: "",
 		access: "",
 	});
@@ -104,143 +105,127 @@ export default function LoginCard() {
 	};
 
 
-
 	return (
-		<Flex direction={"column"} align={"center"} justify={"center"} h={"100vh"} overflowX={"hidden"}>
-			<Stack direction={"row"} mb={2}>
-				<Button
-        		    maxW={"5xl"}
-        		    py={8}
-        		    bg={"orange.500"}
-        		    px={16}
-        		    onClick={() => setAuthScreen("signup")}
-        		>
-            		<Link as={RouterLink} to={"/auth"}>
-            		    Sign up
-            		</Link>
-        		</Button>
-
-				<Button
-            		maxW={"5xl"}
-            		py={8}
-            		px={16}
-            		bg={"orange.500"}
-            		onClick={() => setAuthScreen("login")}
-        		>
-            		<Link as={RouterLink} to={"/auth"} >
-            		    Login
-            		</Link>
-        		</Button>
-			</Stack>
-			<Stack spacing={8} mx={"auto"} maxW={"lg"} px={3} bg={useColorModeValue("orange.400", "orange.600")} rounded={"3xl"}>
-				<Stack align={"center"}>
-					<Heading fontSize={"2xl"} textAlign={"center"} py={3}>
+		<Flex justifyContent={"center"} bg={"blackAlpha.300"} px={12} rounded={"2xl"} py={8}>
+		  	<Stack spacing='4'>
+				<VStack justifyContent={"center"} spacing='5'>
+					<Image mt={"-12"} src={Logo} rounded={"full"} w={16} h={"auto"} />
+				  	<Heading
+						fontWeight={"bold"}
+						fontSize='1.5em'
+						letterSpacing='-0.5px'
+				  	>
 						Login
-					</Heading>
-				</Stack>
-				<Box
-					rounded={"lg"}
-					boxShadow={"lg"}
-					p={8}
-					w={{
-						base: "full",
-						sm: "400px",
-					}}
-					maxH={"90vh"}
-      				overflowY={"auto"}
-				>
-					<Stack spacing={4}>
-						<FormControl isRequired>
-							<FormLabel>Email</FormLabel>
-							<Input
-								type='email'
-								value={inputs.email}
-								onChange={(e) => setInputs((inputs) => ({ ...inputs, email: e.target.value }))}
-							/>
-						</FormControl>
-						<FormControl isRequired>
-							<FormLabel>Password</FormLabel>
-							<InputGroup>
-								<Input
-									type={showPassword ? "text" : "password"}
-									value={inputs.password}
-									onChange={(e) => setInputs((inputs) => ({ ...inputs, password: e.target.value }))}
-								/>
-								<InputRightElement h={"full"}>
+				  	</Heading>
+				</VStack>
+				<Card bg={useColorModeValue("whitesmoke", "gray.dark")} variant='outline' borderColor={"white"} w={"full"}>
+				  	<CardBody>
+						<Stack spacing='4'>
+								<FormControl>
+								  	<FormLabel size='md'>Email</FormLabel>
+								  	<Input
+										type='email'
+										bg={useColorModeValue("gray.300", "gray.800")}
+										borderColor={"blackAlpha.400"}
+										size='sm'
+										borderRadius='6px'
+										value={inputs.email}
+										onChange={(e) => setInputs((inputs) => ({...inputs, email: e.target.value}))}
+								  	/>
+								</FormControl>
+								<FormControl>
+								<HStack justifyContent={"space-between"}>
+									<FormLabel size={"md"}>Password</FormLabel>
 									<Button
-										variant={"ghost"}
-										onClick={() => setShowPassword((showPassword) => !showPassword)}
-									>
-										{showPassword ? <ViewIcon /> : <ViewOffIcon />}
-									</Button>
-								</InputRightElement>
-							</InputGroup>
-						</FormControl>
-
-						<FormControl>
-							<FormLabel>Log In As: </FormLabel>
-							<Select color={"black"} isRequired value={inputs.access} onChange={(e) => setInputs((inputs) => ({...inputs, access: e.target.value}))} placeholder="Please Select Your Access" bg={"gray.200"}>
-								<option value={"Student"}>Student</option>
-								<option value={"Lecturer"}>Lecturer</option>
-								<option value={"Admin"}>Admin</option>
-							</Select>
-						</FormControl>
-
-						<Text _hover={{color: "blue.700"}} w={"fit-content"} color={"white"} cursor={"pointer"} fontWeight={"medium"} onClick={() => setOpenModal(true)}>Forgot Password?</Text>
-						{openModal && (
-							<Modal isOpen={onOpen} onClose={() => setOpenModal(false)} size="md">
-						    <ModalOverlay />
-						    <ModalContent borderRadius="md">
-						        <ModalHeader>Change Password</ModalHeader>
-						        <ModalCloseButton />
-						        <ModalBody>
-						            <FormControl mb={4}>
-						                <FormLabel>Email:</FormLabel>
-						                <Input type="email" placeholder="Enter your email" value={changingPassword.email} onChange={(e) => setChangingPassword((changingPassword) => ({...changingPassword, email: e.target.value}))} />
-						            </FormControl>
-
-						            <FormControl mb={4}>
-						                <FormLabel>New Password:</FormLabel>
-						                <Input type="password" placeholder="Enter your new password" autoComplete="off" value={changingPassword.newPassword} onChange={(e) => setChangingPassword((changingPassword) => ({...changingPassword, newPassword: e.target.value}))} />
-						            </FormControl>
-
-						            <FormControl mb={4}>
-						                <FormLabel>Confirm Password:</FormLabel>
-						                <Input type="password" placeholder="Confirm your new password" autoComplete="off" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-						            </FormControl>
-
-						            <Button
-						                colorScheme="orange"
-						                isLoading={loading}
-						                onClick={changePassword}
-						                width="full"
-						                mt={4}
-						            >
-						                Change Password
-						            </Button>
-						        </ModalBody>
-						    </ModalContent>
-						</Modal>
-						)}
-
-						<Stack spacing={10} pt={2}>
+                        				as='a'
+										onClick={() => setOpenModal(true)}
+										cursor={"pointer"}
+                        				variant='link'
+                        				size='sm'
+                        				color={"blue.500"}
+                        				fontWeight='500'
+                      				>
+                        				Forgot password?
+                      				</Button>
+								</HStack>
+								  	<Input
+										type='text'
+										bg={useColorModeValue("gray.300", "gray.800")}
+										borderColor={"blackAlpha.400"}
+										size='sm'
+										borderRadius='6px'
+										value={inputs.password}
+										onChange={(e) => setInputs((inputs) => ({...inputs, password: e.target.value}))}
+								  	/>
+								</FormControl>
+								<FormControl>
+									<FormLabel size='sm'>Log in As</FormLabel>
+                            		<Select mt={2} fontSize={"sm"} color={"black"} isRequired value={inputs.access} onChange={(e) => setInputs((inputs) => ({...inputs, access: e.target.value}))} placeholder="Please Select Your Access" bg={useColorModeValue("gray.300", "gray.800")} borderColor={"blackAlpha.400"}>
+						    			<option value={"Student"}>Student</option>
+						    			<option value={"Lecturer"}>Lecturer</option>
+						    			<option value={"Admin"}>Admin</option>
+						    		</Select>
+								</FormControl>
 							<Button
-								loadingText='Logging in'
-								size='lg'
-								bg={useColorModeValue("orange.500", "orange.700")}
-								color={"white"}
-								_hover={{
-									bg: useColorModeValue("orange.700", "orange.400"),
-								}}
-								onClick={handleLogin}
-								isLoading={loading}
+							  bg={useColorModeValue("orange.300", "orange.600")}
+							  color={useColorModeValue("black", "white")}
+							  size='sm'
+							  _hover={{ bg: "whatsapp.600" }}
+							  _active={{ bg: "whatsapp.600" }}
+							  onClick={handleLogin}
+							  isLoading={loading}
 							>
-								Login
+							  Login
 							</Button>
 						</Stack>
-					</Stack>
-				</Box>
-			</Stack>
+				  	</CardBody>
+				</Card>
+
+				<Card variant='outline' borderColor='#d0d7de'>
+				  	<CardBody>
+					<Center>
+					  	<HStack fontSize='md' spacing='5'>
+							<Text>Don't have an account with us? Sign up now</Text>
+							<Link as={RouterLink} onClick={() => setAuthScreen("signup")} to={'/signup'} color={"orange.600"} fontWeight={"semibold"}>
+							  	Sign Up
+							</Link>
+					  	</HStack>
+					</Center>
+				  </CardBody>
+				</Card>
+		  	</Stack>
+			{openModal && (
+				<Modal isOpen={onOpen} onClose={() => setOpenModal(false)} size="md">
+				<ModalOverlay />
+				<ModalContent borderRadius="md">
+				    <ModalHeader>Change Password</ModalHeader>
+				    <ModalCloseButton />
+				    <ModalBody>
+				        <FormControl mb={4}>
+				            <FormLabel>Email:</FormLabel>
+				            <Input type="email" placeholder="Enter your email" value={changingPassword.email} onChange={(e) => setChangingPassword((changingPassword) => ({...changingPassword, email: e.target.value}))} />
+				        </FormControl>
+				        <FormControl mb={4}>
+				            <FormLabel>New Password:</FormLabel>
+				            <Input type="password" placeholder="Enter your new password" autoComplete="off" value={changingPassword.newPassword} onChange={(e) => setChangingPassword((changingPassword) => ({...changingPassword, newPassword: e.target.value}))} />
+				        </FormControl>
+				        <FormControl mb={4}>
+				            <FormLabel>Confirm Password:</FormLabel>
+				            <Input type="password" placeholder="Confirm your new password" autoComplete="off" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+				        </FormControl>
+				        <Button
+				            colorScheme="orange"
+				            isLoading={loading}
+				            onClick={changePassword}
+				            width="full"
+				            mt={4}
+				        >
+				            Change Password
+				        </Button>
+				    </ModalBody>
+				</ModalContent>
+				</Modal>
+				)}
 		</Flex>
 	);
 }
