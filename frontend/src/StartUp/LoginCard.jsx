@@ -21,6 +21,7 @@ import userAtom from "../atoms/userAtom";
 import Cookies from "js-cookies";
 import Logo from "../assets/images/logo.png";
 import axios from "axios";
+import { host } from "../APIRoute/APIRoute";
 
 
 export default function LoginCard() {
@@ -54,7 +55,7 @@ export default function LoginCard() {
 	  	}
 
 	  	try {
-			const res = await axios.put("/api/users/changePassword", changingPassword, {
+			const res = await axios.put(`${host}/api/users/changePassword`, changingPassword, {
 			  	headers: {
 					"Content-Type": "application/json",
 			  	},
@@ -77,6 +78,12 @@ export default function LoginCard() {
 		setLoading(true);
 
 		try {
+			const res = await axios.post(`${host}/api/users/login`, inputs, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
 			if (res.status === 200) {
 				const data = await res.data;
 				if (data.error) {
