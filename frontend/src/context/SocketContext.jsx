@@ -20,7 +20,7 @@ export const SocketContextProvider = ({ children }) => {
 	const [selectedConversation] = useRecoilState(selectedConversationAtom);
 
 	useEffect(() => {
-		const newSocket = io("http://localhost:5000", {
+		const newSocket = io("https://campus-connect-backend-t60k.onrender.com", {
 			query: {
 				userId: user?._id,
 			},
