@@ -116,7 +116,6 @@ const createUserAccount = () => {
                             bg={useColorModeValue("gray.300", "whiteAlpha.600")}
                             color={"black"}
                             value={inputs.access}
-                            placeholder="Select Access Level"
                             onChange={(e) => setInputs((inputs) => ({...inputs, access: e.target.value}))}
                             placeholder="Select Access Level"
                         >

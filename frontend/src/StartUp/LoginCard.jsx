@@ -160,7 +160,7 @@ export default function LoginCard() {
 								</FormControl>
 								<FormControl>
 									<FormLabel size='sm'>Log in As</FormLabel>
-                            		<Select mt={2} fontSize={"sm"} color={"black"} isRequired value={inputs.access} onChange={(e) => setInputs((inputs) => ({...inputs, access: e.target.value}))} placeholder="Please Select Your Access" bg={useColorModeValue("gray.300", "gray.800")} borderColor={"blackAlpha.400"}>
+                            		<Select mt={2} fontSize={"sm"} color={useColorModeValue("black", "white")} isRequired value={inputs.access} onChange={(e) => setInputs((inputs) => ({...inputs, access: e.target.value}))} placeholder="Please Select Your Access" bg={useColorModeValue("gray.300", "gray.800")} borderColor={"blackAlpha.400"}>
 						    			<option value={"Student"}>Student</option>
 						    			<option value={"Lecturer"}>Lecturer</option>
 						    			<option value={"Admin"}>Admin</option>
