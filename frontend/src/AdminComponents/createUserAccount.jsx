@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import useShowToast from "../hooks/useShowToast";
+import axios from "axios";
 
 
 const createUserAccount = () => {
@@ -23,39 +24,38 @@ const createUserAccount = () => {
     const [loading, setLoading] = useState(false);
     const showToast = useShowToast();
 
+
     const handleSubmit = async () => {
         setLoading(true);
 
         try {
-            const res = await fetch(`/api/admin/createUserAccount`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(inputs),
+            const res = await axios.post(`/api/admin/createUserAccount`, inputs, {
+              headers: {
+                "Content-Type": "application/json",
+              },
             });
 
-            const data = await res.json();
+            const data = res.data;
 
-            if(data.error) {
-                showToast("Error", data.error, "error");
-                return;
+            if (data.error) {
+              showToast("Error", data.error, "error");
+              return;
             } else {
-                showToast("Success", "User created successfully!", "success");
+              showToast("Success", "User created successfully!", "success");
             }
-        }catch(error) {
-            showToast(error);
-        }finally{
+        } catch (error) {
+            showToast("Error", error.message, "error");
+        } finally {
             setLoading(false);
             setInputs({
                 nric: "",
                 username: "",
                 email: "",
                 access: "",
-                password: ""
-            })
+                password: "",
+            });
         }
-    }
+    };
 
 
     return (

@@ -8,6 +8,7 @@ import {
     Spinner
 } from "@chakra-ui/react";
 import useShowToast from "../hooks/useShowToast";
+import axios from 'axios';
 
 
 const ViewUserAccount = () => {
@@ -15,17 +16,18 @@ const ViewUserAccount = () => {
     const showToast = useShowToast();
     const [loadingUserData, setLoadingData] = useState(true);
 
+
     useEffect(() => {
         const fetchUserData = async () => {
-            try {
-                const response = await fetch(`/api/admin/getAllUsers`);
-                const data = await response.json();
-                setUserData(data);
-            } catch (error) {
-                showToast("Error", error, "error");
-            } finally {
-                setLoadingData(false);
-            }
+          try {
+            const response = await axios.get(`/api/admin/getAllUsers`);
+            const data = response.data;
+            setUserData(data);
+          } catch (error) {
+            showToast("Error", error, "error");
+          } finally {
+            setLoadingData(false);
+          }
         };
 
         fetchUserData();
@@ -33,11 +35,9 @@ const ViewUserAccount = () => {
 
     const deleteUserAccount = async (userId) => {
         try {
-            const response = await fetch(`/api/admin/deleteUser/${userId}`, {
-                method: "DELETE",
-            });
+            const response = await axios.delete(`/api/admin/deleteUser/${userId}`);
 
-            if (response.ok) {
+            if (response.status === 200) {
                 // Remove the deleted user from the state
                 setUserData((prevUsers) =>
                   prevUsers.filter((user) => user._id !== userId)
@@ -47,7 +47,7 @@ const ViewUserAccount = () => {
                 throw new Error("Failed to delete user account.");
             }
         } catch (error) {
-            showToast("Error", error, "error");
+          showToast("Error", error, "error");
         }
     };
 

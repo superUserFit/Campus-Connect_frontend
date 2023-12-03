@@ -1,6 +1,7 @@
 import { Box, Checkbox, Flex, Grid, Spinner, Text, useColorModeValue } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useShowToast from "../hooks/useShowToast";
+import axios from 'axios';
 
 
 const Report = () => {
@@ -9,19 +10,19 @@ const Report = () => {
     const showToast = useShowToast();
 
 
+
     useEffect(() => {
         const getReports = async () => {
             try {
-                const response = await fetch(`/api/customerService/getReports`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
+                const response = await axios.get(`/api/customerService/getReports`, {
+                  headers: { "Content-Type": "application/json" },
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setReports(data);
+                if (response.status === 200) {
+                  const data = response.data;
+                  setReports(data);
                 } else {
-                    showToast("Error", "Failed to fetch reports", "error");
+                  showToast("Error", "Failed to fetch reports", "error");
                 }
             } catch (error) {
                 showToast("Error", "An unexpected error occurred", "error");
@@ -32,6 +33,7 @@ const Report = () => {
 
         getReports();
     }, [showToast]);
+
 
     return (
         <Box w={"full"} p={8}>

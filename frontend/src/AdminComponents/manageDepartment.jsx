@@ -9,13 +9,8 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import useShowToast from "../hooks/useShowToast.js";
-import {
-    addCourseRoute,
-    addDiplomaRoute,
-    createDepartmentRoute,
-    getDepartmentsRoute,
-    getDiplomasRoute
-} from "../APIRoute/APIRoute.js";
+import axios from "axios";
+
 
 const ManageDepartment = () => {
     const [departmentName, setDepartmentName] = useState("");
@@ -36,9 +31,10 @@ const ManageDepartment = () => {
     // Fetch Departments
     const fetchDepartments = async () => {
         try {
-            const response = await fetch(`/api/admin/getDepartments`);
-            if (response.ok) {
-                const data = await response.json();
+            const response = await axios.get(`/api/admin/getDepartments`);
+
+            if (response.status === 200) {
+                const data = response.data;
                 setDepartments(data);
             } else {
                 showToast("Error", "Failed to fetch departments", "error");
@@ -50,22 +46,22 @@ const ManageDepartment = () => {
     };
 
 
-    // Fetch Diplomas
     const fetchDiplomas = async () => {
         try {
-            const response = await fetch(`/api/users/getDiplomas`);
+            const response = await axios.get(`/api/users/getDiplomas`);
 
-            if (response.ok) {
-                const data = await response.json();
-                setDiplomas(data);
+            if (response.status === 200) {
+              const data = response.data;
+              setDiplomas(data);
             } else {
-                showToast("Error", "Failed to fetch departments", "error");
+              showToast("Error", "Failed to fetch diplomas", "error");
             }
         } catch (error) {
             console.error(error);
-            showToast("Error", "Failed to fetch departments", "error");
+            showToast("Error", "Failed to fetch diplomas", "error");
         }
     };
+
 
 
     useEffect(() => {
@@ -86,19 +82,15 @@ const ManageDepartment = () => {
 
         try {
             setIsLoading(true);
-            const response = await fetch(`/api/admin/createDepartment`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ departmentName: departmentName })
+            const response = await axios.post(`/api/admin/createDepartment`, {
+              departmentName: departmentName,
             });
 
-            if (response.ok) {
-                showToast("Success", "Successfully create new department", "success");
-                fetchDepartments();
+            if (response.status === 200) {
+              showToast("Success", "Successfully create new department", "success");
+              fetchDepartments();
             } else {
-                showToast("Error", "Failed to create department", "error");
+              showToast("Error", "Failed to create department", "error");
             }
         } catch (error) {
             console.error(error);
@@ -108,65 +100,56 @@ const ManageDepartment = () => {
         }
     };
 
-
-    //  Handle Add Diploma
+    // Handle Add Diploma
     const handleAddDiploma = async () => {
-        if(!addDiploma.department || !addDiploma.diplomaName) {
+        if (!addDiploma.department || !addDiploma.diplomaName) {
             showToast("Error", "Incomplete Field", "error");
             return;
         }
 
         try {
             setIsLoading(true);
-            const response = await fetch(`/api/admin/addDiploma`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(addDiploma)
-            });
+            const response = await axios.post(`/api/admin/addDiploma`, addDiploma);
 
-            if(response.ok) {
-                showToast("Success", "Successfully added new diploma", "success");
-                fetchDiplomas();
-            }else {
-                showToast("Error", "Failed to add diploma", "error");
+            if (response.status === 200) {
+              showToast("Success", "Successfully added new diploma", "success");
+              fetchDiplomas();
+            } else {
+              showToast("Error", "Failed to add diploma", "error");
             }
-        }catch(error) {
-            showToast(error);
-        }finally {
+        } catch (error) {
+            console.error(error);
+            showToast("Error", "Failed to add diploma", "error");
+        } finally {
             setIsLoading(false);
         }
     };
 
-
-    //  Handle Aad Course
+    // Handle Add Course
     const handleAddCourse = async () => {
-        if(!addCourses.diploma || !addCourses.courseCode || !addCourses.courseName) {
+        if (!addCourses.diploma || !addCourses.courseCode || !addCourses.courseName) {
             showToast("Error", "Incomplete fields", "error");
             return;
         }
 
         try {
             setIsLoading(true);
-            const response = await fetch(`/api/admin/addCourse`, {
-                method: "POST",
-                headers: {  "Content-Type": "application/json"  },
-                body: JSON.stringify(addCourses)
-            });
+            const response = await axios.post(`/api/admin/addCourse`, addCourses);
 
-            const data = await response.json();
-            if(response.ok) {
-                showToast("Success", `Successfully Added Courses`, "success");
+            if (response.status === 200) {
+              showToast("Success", `Successfully Added Courses`, "success");
             } else {
-                showToast("Error", data.error, "error");
+              const data = response.data;
+              showToast("Error", data.error, "error");
             }
-        }catch(error) {
-            showToast(error);
-        }finally {
+        } catch (error) {
+            console.error(error);
+            showToast("Error", error.message, "error");
+        } finally {
             setIsLoading(false);
         }
     };
+
 
     return (
         <Flex gap={4} flexDirection={"row"} overflowY={"auto"}>
