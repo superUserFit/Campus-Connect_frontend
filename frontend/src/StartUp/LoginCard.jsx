@@ -20,6 +20,7 @@ import useShowToast from "../hooks/useShowToast";
 import userAtom from "../atoms/userAtom";
 import Cookies from "js-cookies";
 import Logo from "../assets/images/logo.png";
+import axios from "axios";
 
 
 export default function LoginCard() {
@@ -41,52 +42,49 @@ export default function LoginCard() {
 	});
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	const changePassword = async () => {
-		setLoading(true);
 
-		if(!changingPassword) {
+	const changePassword = async () => {
+	  	setLoading(true);
+
+	  	if (!changingPassword) {
 			showToast("Incomplete Information", "Please fill required fields", "error");
 			return;
-		} else if(changingPassword.newPassword !== confirmPassword) {
+	  	} else if (changingPassword.newPassword !== confirmPassword) {
 			showToast("Incorrect Password", "Password Do Not Match", "error");
-		}
+	  	}
 
-		try {
-			const res = await fetch("/api/users/changePassword", {
-				method: "PUT",
-				headers: {
+	  	try {
+			const res = await axios.put("/api/users/changePassword", changingPassword, {
+			  	headers: {
 					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(changingPassword),
+			  	},
 			});
 
-			if(res.ok) {
-				showToast("User password has been changed", "Password changed successfully", "success");
+			if (res.status === 200) {
+			  	showToast("User password has been changed", "Password changed successfully", "success");
 			} else {
-				showToast("Failed to changed password", "Error while changing password", "error");
+			  	showToast("Failed to change password", "Error while changing password", "error");
 			}
-		}catch(error) {
-			showToast("Error", data.error, "error");
-		}finally {
+	  	} catch (error) {
+			showToast("Error", error.message, "error");
+	  	} finally {
 			setLoading(false);
-		}
-	}
+	  	}
+	};
+
 
 	const handleLogin = async () => {
 		setLoading(true);
 
-		console.log("Inputs: ", inputs);
 		try {
-			const res = await fetch("/api/users/login", {
-				method: "POST",
+			const res = await axios.post("/api/users/login", inputs, {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(inputs),
 			});
 
-			if (res.ok) {
-				const data = await res.json();
+			if (res.status === 200) {
+				const data = await res.data;
 				if (data.error) {
 					showToast("Error", data.error, "error");
 				} else {

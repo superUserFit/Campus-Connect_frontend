@@ -36,31 +36,32 @@ export default function SignupCard() {
 
 
 	const handleSignup = async () => {
-		if(inputs.password !== confirmPassword) {
+	  	if (inputs.password !== confirmPassword) {
 			showToast("Error", "Password Not Match", "error");
 			return;
-		}
+	  	}
 
-		try {
-			const res = await fetch("/api/users/signup", {
-				method: "POST",
-				headers: {
+	  	try {
+			const res = await axios.post("/api/users/signup", inputs, {
+			  	headers: {
 					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(inputs),
+			  	},
 			});
-			const data = await res.json();
+
+			const data = res.data;
 
 			if (data.error) {
-				showToast("Error", data.error, "error");
-				return;
+			  	showToast("Error", data.error, "error");
+			  	return;
 			}
+
 			Cookies.setItem("Campus-Connect", JSON.stringify(data));
 			setUser(data);
-		} catch (error) {
-			showToast("Error", error, "error");
-		}
+	  	} catch (error) {
+			showToast("Error", error.message, "error");
+	  	}
 	};
+
 
 
 	return (

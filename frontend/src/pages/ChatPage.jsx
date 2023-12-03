@@ -10,6 +10,7 @@ import { conversationsAtom, selectedConversationAtom } from "../atoms/messagesAt
 import userAtom from "../atoms/userAtom";
 import { useSocket } from "../context/SocketContext";
 import UserListItem from "../components/UserListItem";
+import axios from "axios";
 
 
 const ChatPage = () => {
@@ -63,51 +64,51 @@ const ChatPage = () => {
 
 
 	useEffect(() => {
-		const getConversations = async () => {
+	  	const getConversations = async () => {
 			try {
-				const res = await fetch('/api/messages/conversations');
-				const data = await res.json();
+			  	const res = await axios.get('/api/messages/conversations');
+			  	const data = res.data;
 
-				if (data.error) {
+			  	if (data.error) {
 					showToast("Error", data.error, "error");
 					return;
-				}
-				setConversations(data);
+			  	}
+			  	setConversations(data);
 			} catch (error) {
-				showToast("Error", error.message, "error");
+			  	showToast("Error", error.message, "error");
 			} finally {
-				setLoadingConversations(false);
+			  	setLoadingConversations(false);
 			}
-		};
+	  	};
 
-		getConversations();
-	}, [showToast, setConversations]);
+	  	getConversations();
+	}, [showToast, setConversations, setLoadingConversations]);
 
 
 	const handleConversationSearch = async (query) => {
-		setSearch(query);
+	  	setSearch(query);
 
-		if(!query) {
+	  	if (!query) {
 			setSearchResults([]);
 			return;
-		}
+	  	}
 
-		try {
+	  	try {
 			setLoading(true);
-			const response = await fetch(`/api/users/getAllUsers?search=${query}`);
+			const response = await axios.get(`/api/users/getAllUsers`, {
+			  	params: {
+					search: query,
+			  	},
+			});
 
-			if (response.ok) {
-				const data = await response.json();
-				setSearchResults(data);
-			} else {
-				throw new Error("Failed to fetch users");
-			}
-		} catch (error) {
+			const data = response.data;
+			setSearchResults(data);
+	  	} catch (error) {
 			showToast("Error", error.message, "error");
-		} finally {
+	  	} finally {
 			setLoading(false);
 			setConversations((prevConvs) => [...prevConvs]);
-		}
+	  	}
 	};
 
 
