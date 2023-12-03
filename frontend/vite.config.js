@@ -9,7 +9,7 @@ export default defineConfig({
 		// Get rid of the CORS error
 		proxy: {
 			"/api": {
-				target: "http://13.212.151.208:3000/",
+				target: "https://campus-connect-backend-t60k.onrender.com",
 				changeOrigin: true,
 				secure: false,
 			},
