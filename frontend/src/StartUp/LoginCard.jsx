@@ -77,7 +77,7 @@ export default function LoginCard() {
 		setLoading(true);
 
 		try {
-			const res = await axios.post("/api/users/login", inputs, {
+			const res = await axios.post("http://13.212.151.208:3000/api/users/login", inputs, {
 				headers: {
 					"Content-Type": "application/json",
 				},
