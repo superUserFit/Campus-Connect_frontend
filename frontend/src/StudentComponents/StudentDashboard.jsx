@@ -28,7 +28,7 @@ const StudentDashboard = () => {
             gap={2}
             flexDirection={"column"}
         >
-            <Flex justifyContent={"center"} alignItems={"center"} mx={4} gap={4}>
+            <Flex justifyContent={"center"} alignItems={"center"} mt={1} mx={4} gap={4}>
                 <Button bg={useColorModeValue("orange.300", "orange.700")} textAlign={"center"} fontWeight={"medium"} onClick={() => setSelectedComponent("allCourses")}>All courses</Button>
                 <Button bg={useColorModeValue("orange.300", "orange.700")} textAlign={"center"} fontWeight={"medium"} onClick={() => setSelectedComponent("enrolledCourses")}>Enrolled courses</Button>
             </Flex>

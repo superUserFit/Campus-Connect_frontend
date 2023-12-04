@@ -78,14 +78,16 @@ export default function LoginCard() {
 		setLoading(true);
 
 		try {
-			const res = await axios.post(`${host}/api/users/login`, inputs, {
+			const res = await fetch(`${host}/api/users/login`, {
+				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
+				body: JSON.stringify(inputs)
 			});
 
-			if (res.status === 200) {
-				const data = await res.data;
+			if (res.ok) {
+				const data = await res.json();
 				if (data.error) {
 					showToast("Error", data.error, "error");
 				} else {
@@ -148,7 +150,7 @@ export default function LoginCard() {
                       				</Button>
 								</HStack>
 								  	<Input
-										type='text'
+										type='password'
 										bg={useColorModeValue("gray.300", "gray.800")}
 										borderColor={"blackAlpha.400"}
 										size='sm'

@@ -13,6 +13,7 @@ export const useSocket = () => {
 	return useContext(SocketContext);
 };
 
+
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
 	const [onlineUsers, setOnlineUsers] = useState([]);
@@ -21,7 +22,7 @@ export const SocketContextProvider = ({ children }) => {
 	const [selectedConversation] = useRecoilState(selectedConversationAtom);
 
 	useEffect(() => {
-		const newSocket = io(host, {
+		const newSocket = io("http://localhost:5000", {
 			query: {
 				userId: user?._id,
 			},

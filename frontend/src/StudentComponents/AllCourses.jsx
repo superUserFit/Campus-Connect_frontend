@@ -13,7 +13,6 @@ import {
     ModalCloseButton,
     SkeletonCircle,
     Skeleton,
-    Spinner
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import useShowToast from "../hooks/useShowToast.js";
@@ -124,7 +123,7 @@ const AllCourses = () => {
         {!loadingCourse && (
         <Flex flexDirection="column" alignItems="center">
             {chunkArray(courses, 4).map((row, rowIndex) => (
-              <Flex key={rowIndex} gap={6} mt={8}>
+              <Flex key={rowIndex} gap={6}>
                 {row.map((course) => (
                   <Flex
                     flexDirection={"column"}
@@ -134,6 +133,7 @@ const AllCourses = () => {
                     rounded={"xl"}
                     width={"100%"}
                     key={course._id}
+                    mt={4}
                   >
                     <Text fontWeight={"semibold"} textAlign={"center"}>
                       {course.courseCode}
@@ -159,34 +159,34 @@ const AllCourses = () => {
         )}
 
         {selectedCourse && (
-          <Modal isOpen onClose={() => setSelectedCourse(null)} blockScrollOnMount={false}>
+        <Modal isOpen onClose={() => setSelectedCourse(null)} blockScrollOnMount={false}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>
-                <Text fontSize={"lg"}>{selectedCourse.courseCode}</Text>
-                <Text fontSize={"md"}>{selectedCourse.courseName}</Text>
-                <ModalCloseButton />
-              </ModalHeader>
-              <ModalBody>
-                <Flex>
-                  <Text fontWeight={"semibold"} mx={2} mt={2}>
-                    Enrollment Key:{" "}
-                  </Text>
-                  <Input
-                    type="text"
-                    w={"65%"}
-                    value={enrollmentKey}
-                    onChange={(e) => setEnrollmentKey(e.target.value)}
-                    bg={useColorModeValue("orange.200", "orange.700")}
-                    ml={2}
-                  />
-                </Flex>
-                <Button my={3} w={"100%"} bg={useColorModeValue("orange.300", "orange.600")} onClick={handleEnrollCourse} isLoading={loading}>
-                  Enroll
-                </Button>
-              </ModalBody>
+                <ModalHeader>
+                    <Text fontSize={"lg"}>{selectedCourse.courseCode}</Text>
+                    <Text fontSize={"md"}>{selectedCourse.courseName}</Text>
+                    <ModalCloseButton />
+                </ModalHeader>
+                <ModalBody>
+                    <Flex>
+                        <Text fontWeight={"semibold"} mx={2} mt={2}>
+                            Enrollment Key:{" "}
+                        </Text>
+                        <Input
+                            type="text"
+                            w={"65%"}
+                            value={enrollmentKey}
+                            onChange={(e) => setEnrollmentKey(e.target.value)}
+                            bg={useColorModeValue("orange.200", "orange.700")}
+                            ml={2}
+                        />
+                    </Flex>
+                    <Button my={3} w={"100%"} bg={useColorModeValue("orange.300", "orange.600")} onClick={handleEnrollCourse} isLoading={loading}>
+                      Enroll
+                    </Button>
+                </ModalBody>
             </ModalContent>
-          </Modal>
+        </Modal>
         )}
         </Flex>
     );

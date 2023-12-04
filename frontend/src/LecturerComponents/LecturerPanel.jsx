@@ -30,8 +30,8 @@ const LecturerPanel = () => {
             flexDirection={"column"}
         >
             <Flex justifyContent={"center"} alignItems={"center"} mx={4} gap={4} mt={1}>
-                <Button bg={useColorModeValue("white", "blackAlpha.700")} textAlign={"center"} fontWeight={"medium"} onClick={() => setSelectedComponent("courseActivity")}>Manage Course</Button>
-                <Button bg={useColorModeValue("white", "blackAlpha.700")} textAlign={"center"} fontWeight={"medium"} onClick={() => setSelectedComponent("assignments")}>Manage Assignments</Button>
+                <Button bg={useColorModeValue("orange.300", "orange.700")} textAlign={"center"} fontWeight={"medium"} onClick={() => setSelectedComponent("courseActivity")}>Manage Course</Button>
+                <Button bg={useColorModeValue("orange.300", "orange.700")} textAlign={"center"} fontWeight={"medium"} onClick={() => setSelectedComponent("assignments")}>Manage Assignments</Button>
             </Flex>
 
             <Flex justifyContent={"center"}>
